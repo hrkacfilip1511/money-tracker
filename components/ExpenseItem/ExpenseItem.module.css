@@ -1,0 +1,57 @@
+.expenseItem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  background-color: snow;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.expenseImage {
+  background: linear-gradient(rgb(18, 139, 79), springgreen);
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+}
+.expenseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.expenseTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.expenseDate {
+  font-size: 0.8rem;
+  color: rgb(92, 91, 91);
+  font-style: italic;
+}
+.expenseInfoNumbers {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  align-items: end;
+}
+.expenseAmountType {
+  font-size: 0.8rem;
+}
+.expenseAmount {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: red;
+  margin-left: 2px;
+}
+.expenseQuantity {
+  font-size: 0.8rem;
+  color: rgb(66, 65, 65);
+  font-style: italic;
+}

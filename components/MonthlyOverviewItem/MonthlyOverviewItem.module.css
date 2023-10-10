@@ -1,0 +1,32 @@
+.overviewItem {
+  display: flex;
+  width: 30%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.overviewItemInfo {
+  display: flex;
+  flex-direction: column;
+}
+.overviewItemInfo span:nth-child(1) {
+  color: rgb(136, 136, 112);
+}
+.overviewItemInfo span:nth-child(2) {
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+}
+.income {
+  border: 2px solid rgb(4, 223, 4);
+  border-radius: 15px;
+}
+.expense {
+  border: 2px solid red;
+  border-radius: 15px;
+}
+.balance {
+  border: 2px solid goldenrod;
+  border-radius: 15px;
+}
