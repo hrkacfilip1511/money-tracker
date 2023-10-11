@@ -4,6 +4,7 @@ import Expenses from "../Expenses/Expenses";
 import ExpensesMainInfo from "../ExpensesMainInfo/ExpensesMainInfo";
 import classes from "./Dashboard.module.css";
 import { useSession } from "next-auth/react";
+import Payments from "../PaymentCategories/PaymentCategories";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const { data: session, status } = useSession();
@@ -55,15 +56,18 @@ const Dashboard = (props) => {
         userBudget={parsedBudget}
         userBalance={userBalance}
       />
-      <div>
-        <ExpenseFilter
-          date={date}
-          expensesLength={expenses.length}
-          setDate={setDate}
-          setOrderBy={setOrderBy}
-          orderBy={orderBy}
-        />
-        <Expenses expenses={expenses} />
+      <div className={classes.expensesMoreDetails}>
+        <div>
+          <ExpenseFilter
+            date={date}
+            expensesLength={expenses.length}
+            setDate={setDate}
+            setOrderBy={setOrderBy}
+            orderBy={orderBy}
+          />
+          <Expenses expenses={expenses} />
+        </div>
+        <Payments expenses={expenses} />
       </div>
     </div>
   );
