@@ -62,6 +62,11 @@ const ExpenseFilter = (props) => {
     const prevMonthOrYear = new Date(prevYear, prevMonth, 1);
     props.setDate(prevMonthOrYear);
   };
+  const orderHandler = (e) => {
+    if (e.target.value !== "Filter by") {
+      props.setOrderBy(e.target.value);
+    }
+  };
   return (
     <div className={classes.filterBoard}>
       <div className={classes.findedExpenses}>
@@ -90,10 +95,10 @@ const ExpenseFilter = (props) => {
         </div>
       </div>
       <div className={classes.filterByDate}>
-        <select>
+        <select value={props.orderBy} onChange={orderHandler}>
           <option>Filter by</option>
-          <option>Date - desc</option>
-          <option>Date - asc</option>
+          <option>Date</option>
+          <option>Prize</option>
         </select>
       </div>
       <div className={classes.addExpenseBtn}>

@@ -2,7 +2,6 @@ import MonthlyOverviewItem from "../MonthlyOverviewItem/MonthlyOverviewItem";
 import classes from "./ExpensesMainInfo.module.css";
 
 const ExpensesMainInfo = ({ expenseAmount, userBudget, userBalance }) => {
-  console.log(userBudget);
   return (
     <div className={classes.expensesMainInfo}>
       <MonthlyOverviewItem
