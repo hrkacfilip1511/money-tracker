@@ -1,0 +1,116 @@
+.paymentCategoriesContainer {
+  width: 450px;
+  background-color: rgb(252, 212, 212);
+  margin-left: 40px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  border-radius: 12px;
+}
+.paymentDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.paymentDetails h3 {
+  text-align: center;
+  color: rgb(255, 94, 0);
+}
+.paymentMethods {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.creditCard {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(rgb(252, 149, 131) 80%, rgb(250, 156, 139) 20%);
+  justify-content: start;
+  align-items: center;
+  border-radius: 20px;
+}
+.creditCard span {
+  width: 30px;
+  height: 30px;
+  background-color: violet;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.cash {
+  width: 45%;
+  background: linear-gradient(rgb(253, 221, 179) 80%, rgb(252, 226, 193) 20%);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  border-radius: 20px;
+}
+.cash span {
+  width: 30px;
+  height: 30px;
+  background-color: violet;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.paymentDiagram {
+  width: 80%;
+  background-color: beige;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+.paymentPie {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.sliceCash,
+.sliceCard {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+}
+.legend {
+  width: 35%;
+  margin-left: 20px;
+}
+.legendCash,
+.legendCredit {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  align-items: center;
+  margin-top: 10px;
+}
+.legendCashBg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+
+  background-color: rgb(13, 67, 214);
+}
+.legendCreditBg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
+
+  background-color: rgb(255, 76, 32);
+}

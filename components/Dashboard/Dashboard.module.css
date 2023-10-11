@@ -9,3 +9,7 @@
   padding: 20px;
   width: 1200px;
 }
+.expensesMoreDetails {
+  display: flex;
+  flex-direction: row;
+}
