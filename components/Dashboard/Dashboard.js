@@ -13,6 +13,7 @@ const Dashboard = (props) => {
   const [date, setDate] = useState(new Date());
   const [expenseAmount, setExpenseAmount] = useState(0);
   const userBalance = parsedBudget - expenseAmount;
+  const [orderBy, setOrderBy] = useState("");
   useEffect(() => {
     const fetchExpenses = async () => {
       const response = await fetch(
@@ -34,6 +35,19 @@ const Dashboard = (props) => {
       fetchExpenses();
     }
   }, [session?.user?.email, date]);
+  useEffect(() => {
+    let filteredExpenses = expenses.slice();
+    if (orderBy === "Date") {
+      filteredExpenses = filteredExpenses?.sort(
+        (a, b) => new Date(b.date).getDate() - new Date(a.date).getDate()
+      );
+      setExpenses(filteredExpenses);
+    }
+    if (orderBy === "Prize") {
+      filteredExpenses = filteredExpenses?.sort((a, b) => b.amount - a.amount);
+      setExpenses(filteredExpenses);
+    }
+  }, [orderBy]);
   return (
     <div className={classes.homepageContent}>
       <ExpensesMainInfo
@@ -46,6 +60,8 @@ const Dashboard = (props) => {
           date={date}
           expensesLength={expenses.length}
           setDate={setDate}
+          setOrderBy={setOrderBy}
+          orderBy={orderBy}
         />
         <Expenses expenses={expenses} />
       </div>
