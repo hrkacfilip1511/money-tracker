@@ -1,0 +1,54 @@
+.categoryExpense {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(248, 164, 234);
+  width: 440px;
+  height: 55px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.categoryImage {
+  width: 15%;
+  height: 100%;
+  border-right: 3px solid rgb(231, 228, 228);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.details .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.details .amount {
+  font-style: italic;
+  color: rgb(92, 92, 92);
+  font-weight: 700;
+}
+.moneyType {
+  font-size: 0.8rem;
+}
+.expenseBgPct {
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+.bgPct {
+  height: 20px;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  transition: width 0.3s ease-in-out;
+}

@@ -25,7 +25,6 @@ export const authOptions = {
           throw new Error("Password is not correct. Plese try again.");
         }
         client.close();
-        console.log(user);
         return {
           email: user.email,
           name: user.name,

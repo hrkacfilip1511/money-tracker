@@ -5,6 +5,7 @@ import ExpensesMainInfo from "../ExpensesMainInfo/ExpensesMainInfo";
 import classes from "./Dashboard.module.css";
 import { useSession } from "next-auth/react";
 import Payments from "../PaymentCategories/PaymentCategories";
+import CategoriesExpenses from "../CategoriesExpenses/CategoriesExpenses";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const { data: session, status } = useSession();
@@ -69,6 +70,7 @@ const Dashboard = (props) => {
         </div>
         <Payments expenses={expenses} />
       </div>
+      <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
     </div>
   );
 };
