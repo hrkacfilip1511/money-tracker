@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import useStore from "../../store/useStore";
 import classes from "./ChangeBudgetForm.module.css";
+import { useSession } from "next-auth/react";
 const ChangeBudgetForm = () => {
-  const session = useStore((state) => state.session);
+  const { data: session, status } = useSession();
   const budgetRef = useRef("");
   const onChangeBudget = async (e) => {
     e.preventDefault();

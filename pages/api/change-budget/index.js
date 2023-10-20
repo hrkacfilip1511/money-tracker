@@ -22,10 +22,15 @@ const handler = async (req, res) => {
         { email: email },
         { $set: { budget: parsedBudget.toString() } }
       );
-    res
-      .status(200)
-      .json({ message: "Budget updated successfully.", user: newBudgetData });
-    client.close();
+    if (newBudgetData.modifiedCount !== 0) {
+      res
+        .status(200)
+        .json({ message: "Budget updated successfully.", user: newBudgetData });
+      client.close();
+    } else {
+      res.status(403).json({ message: "User not found.", user: newBudgetData });
+      client.close();
+    }
   }
 };
 
