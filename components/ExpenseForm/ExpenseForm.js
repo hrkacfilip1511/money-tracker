@@ -4,23 +4,16 @@ import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useStore from "../../store/useStore";
 const ExpenseForm = () => {
   const [categories, setCategories] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [category, setCategory] = useState("");
-  const [session, setSession] = useState("");
   const router = useRouter();
+  const session = useStore((state) => state.session);
   useEffect(() => {
-    getSession().then((session) => {
-      if (!session) {
-        router.replace("/auth");
-      } else {
-        setSession(session.user.email);
-      }
-    });
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
       const data = await response.json();
@@ -61,7 +54,7 @@ const ExpenseForm = () => {
     const enteredQuantity = quantityRef.current.value;
     const enteredDetails = detailsRef.current.value;
     const enteredData = {
-      email: session,
+      email: session.user.email,
       title: enteredTitle,
       category: selectedCategory,
       date: new Date(date),

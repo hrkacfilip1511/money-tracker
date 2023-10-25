@@ -1,16 +1,16 @@
 import { useState } from "react";
 import classes from "./Auth.module.css";
 import { useRef } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import useStore from "../../store/useStore";
 const Auth = (props) => {
   const [isLogin, setisLogin] = useState(true);
   const [isCheckedTerms, setIsCheckedTerms] = useState(false);
   const [errorCheckBoxClass, setErrorCheckBoxClass] = useState(false);
   const router = useRouter();
-
-  const { data: session, status } = useSession();
-  if (session?.user.email) {
+  const session = useStore((state) => state.session);
+  if (session?.user?.email) {
     router.replace("/");
   }
   const emailRef = useRef();

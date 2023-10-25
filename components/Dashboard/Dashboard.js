@@ -3,12 +3,12 @@ import ExpenseFilter from "../ExpenseFilter/ExpenseFilter";
 import Expenses from "../Expenses/Expenses";
 import ExpensesMainInfo from "../ExpensesMainInfo/ExpensesMainInfo";
 import classes from "./Dashboard.module.css";
-import { useSession } from "next-auth/react";
 import Payments from "../PaymentCategories/PaymentCategories";
 import CategoriesExpenses from "../CategoriesExpenses/CategoriesExpenses";
+import useStore from "../../store/useStore";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
-  const { data: session, status } = useSession();
+  const session = useStore((state) => state.session);
   const email = session?.user?.email;
   const userBudget = session?.user?.image;
   const parsedBudget = parseFloat(userBudget)?.toFixed(2);
@@ -70,7 +70,9 @@ const Dashboard = (props) => {
         </div>
         <Payments expenses={expenses} />
       </div>
-      <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
+      {expenses?.length > 0 && (
+        <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
+      )}
     </div>
   );
 };

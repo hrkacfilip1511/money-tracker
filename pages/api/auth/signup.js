@@ -6,6 +6,8 @@ const handler = async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    const budget = req.body.budget;
+    const parsedBudget = parseFloat(budget);
     const client = await connectToDatabase();
 
     const existingUser = await client
@@ -20,7 +22,8 @@ const handler = async (req, res) => {
       !email.includes("@") ||
       email.length === 0 ||
       !password ||
-      password.length < 5
+      password.length < 5 ||
+      isNaN(parsedBudget)
     ) {
       res
         .status(403)
@@ -36,10 +39,12 @@ const handler = async (req, res) => {
     }
 
     const hashedPassword = await hashPassword(password);
-    const result = await client
-      .db()
-      .collection("users")
-      .insertOne({ name: name, email: email, password: hashedPassword });
+    const result = await client.db().collection("users").insertOne({
+      name: name,
+      email: email,
+      password: hashedPassword,
+      budget: parsedBudget,
+    });
   }
   res.status(200).json({ message: "User created!" });
   client.close();

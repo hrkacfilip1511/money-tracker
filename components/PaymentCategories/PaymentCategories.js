@@ -39,9 +39,7 @@ const Payments = ({ expenses }) => {
             <div
               className={classes.paymentPie}
               style={{
-                background: `linear-gradient(to right, rgb(13, 67, 214) ${parsedcashExpenseByPct}%, rgb(255, 76, 32) ${
-                  100 - parsedcashExpenseByPct
-                }%)`,
+                background: `linear-gradient(to right, rgb(13, 67, 214) ${parsedcashExpenseByPct}%, rgb(255, 76, 32) 0%)`,
               }}
             >
               <div className={classes.sliceCard}></div>
