@@ -1,0 +1,55 @@
+.budgetFormContainer {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  flex-direction: column;
+  transform: translateX(-50%);
+  top: 130px;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  background-color: rosybrown;
+  padding: 20px;
+  border-radius: 10px;
+}
+.budgetFormContainer h3 {
+  color: white;
+  font-size: 1.3rem;
+}
+.budgetInput {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 15px;
+}
+.budgetInput label {
+  font-size: 0.9rem;
+}
+.budgetInput input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 5px;
+}
+.budgetInput input:focus {
+  outline: none;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.budgetFormContainer button {
+  padding: 7px 10px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(243, 59, 59);
+  border-radius: 5px;
+  width: 130px;
+  color: white;
+  font-size: 1rem;
+}
+.budgetFormContainer button:hover {
+  opacity: 0.7;
+}
