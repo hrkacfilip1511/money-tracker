@@ -1,0 +1,8 @@
+.expensesMainInfo {
+  display: flex;
+  flex-direction: row;
+  min-width: 100%;
+  margin-bottom: 45px;
+  justify-content: center;
+  align-items: center;
+}
