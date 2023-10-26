@@ -13,18 +13,24 @@ import {
   MdAddCircle,
 } from "react-icons/md";
 import { useRouter } from "next/router";
+import useStore from "../../store/useStore";
 const MainNavigation = (props) => {
   const [isProfilOptionOpened, setIsProfilOptionOpened] = useState(false);
   const [isSidebarShowed, setIsSidebarShowed] = useState(false);
   const router = useRouter();
-
+  const setSearchVal = useStore((state) => state.setSearchVal);
+  const setIsSearching = useStore((state) => state.setIsSearching);
+  const searchValue = useStore((state) => state.searchVal);
   const signOutHandler = () => {
     signOut();
     router.replace("/auth");
   };
-
   const toggleSidebar = () => {
     setIsSidebarShowed((prevBool) => !prevBool);
+  };
+
+  const searchHandler = (e) => {
+    setSearchVal(e.target.value);
   };
 
   return (
@@ -35,8 +41,22 @@ const MainNavigation = (props) => {
           Welcome, <span className={classes.username}>{props.sessionName}</span>
         </h2>
         <div className={classes.searchingTransaction}>
-          <CiSearch />
-          <input type="text" placeholder="Search transactions" />
+          {router.pathname === "/" && (
+            <div className={classes.searchForm}>
+              <CiSearch />
+              <input
+                value={searchValue}
+                type="text"
+                placeholder="Search transactions"
+                onChange={searchHandler}
+                onFocus={() => setIsSearching(true)}
+                onBlur={() => {
+                  setSearchVal("");
+                  setIsSearching(false);
+                }}
+              />
+            </div>
+          )}
         </div>
         <div className={classes.avatar}>
           <CiUser
