@@ -38,8 +38,9 @@
   font-size: 0.8rem;
 }
 .expenseBgPct {
-  width: 70%;
+  width: 60%;
   display: flex;
+  margin-left: 5px;
   align-items: center;
 }
 .bgPct {

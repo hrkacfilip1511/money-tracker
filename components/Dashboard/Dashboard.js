@@ -6,6 +6,7 @@ import classes from "./Dashboard.module.css";
 import Payments from "../PaymentCategories/PaymentCategories";
 import CategoriesExpenses from "../CategoriesExpenses/CategoriesExpenses";
 import useStore from "../../store/useStore";
+import searchFilter from "../../functions/searchFilter";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const session = useStore((state) => state.session);
@@ -16,7 +17,15 @@ const Dashboard = (props) => {
   const [expenseAmount, setExpenseAmount] = useState(0);
   const userBalance = parsedBudget - expenseAmount;
   const [orderBy, setOrderBy] = useState("");
+  const searchVal = useStore((state) => state.searchVal);
+  const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
   useEffect(() => {
+    const filtered = searchFilter(searchVal, expenses);
+    setSearchFilteredExpenses(filtered);
+  }, [searchVal]);
+
+  useEffect(() => {
+    setExpenses([]);
     const fetchExpenses = async () => {
       const response = await fetch(
         `/api/expenses/?email=${email}&date=${date}`
@@ -61,12 +70,22 @@ const Dashboard = (props) => {
         <div>
           <ExpenseFilter
             date={date}
-            expensesLength={expenses.length}
+            expensesLength={
+              searchFilteredExpenses.length > 0
+                ? searchFilteredExpenses.length
+                : expenses.length
+            }
             setDate={setDate}
             setOrderBy={setOrderBy}
             orderBy={orderBy}
           />
-          <Expenses expenses={expenses} />
+          <Expenses
+            expenses={
+              searchFilteredExpenses.length > 0
+                ? searchFilteredExpenses
+                : expenses
+            }
+          />
         </div>
         <Payments expenses={expenses} />
       </div>
