@@ -31,7 +31,7 @@ const ExpenseItemById = () => {
     }
   }, [session?.user?.email]);
 
-  return !expenseData ? (
+  return !expenseData?.title ? (
     <h1>Loading...</h1>
   ) : (
     <div>
