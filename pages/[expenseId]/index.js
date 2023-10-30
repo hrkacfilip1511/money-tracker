@@ -30,7 +30,6 @@ const ExpenseItemById = () => {
       fetchExpenseItem();
     }
   }, [session?.user?.email]);
-
   return !expenseData?.title ? (
     <h1>Loading...</h1>
   ) : (
