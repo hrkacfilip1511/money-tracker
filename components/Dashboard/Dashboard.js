@@ -19,6 +19,7 @@ const Dashboard = (props) => {
   const [orderBy, setOrderBy] = useState("");
   const searchVal = useStore((state) => state.searchVal);
   const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const filtered = searchFilter(searchVal, expenses);
     setSearchFilteredExpenses(filtered);
@@ -27,6 +28,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     setExpenses([]);
     const fetchExpenses = async () => {
+      setIsLoading(true);
       const response = await fetch(
         `/api/expenses/?email=${email}&date=${date}`
       );
@@ -39,6 +41,7 @@ const Dashboard = (props) => {
             0
           );
           setExpenseAmount(expenseAmt?.toFixed(2));
+          setIsLoading(false);
         }
       }
     };
@@ -80,6 +83,7 @@ const Dashboard = (props) => {
             orderBy={orderBy}
           />
           <Expenses
+            isLoading={isLoading}
             expenses={
               searchFilteredExpenses.length > 0
                 ? searchFilteredExpenses
