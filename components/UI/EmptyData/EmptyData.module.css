@@ -1,0 +1,13 @@
+.emptyDataContainer{
+    width: 450px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.message{
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.4px;
+}
