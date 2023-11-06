@@ -13,6 +13,7 @@ const handler = async (req, res) => {
   if (!findedUser) {
     res.status(403).json({ message: "No user found" });
     client.close();
+    return;
   }
 
   const filteredExpenses = findedUser.expenses.filter(

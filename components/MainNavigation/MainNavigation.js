@@ -36,7 +36,7 @@ const MainNavigation = (props) => {
   return (
     <div className={classes.barNavigation}>
       <div className={classes.mainAppHeading}>
-        <h1 className={classes.appName}>App name</h1>
+        <h1 className={classes.appName}>PayTracker</h1>
         <h2>
           Welcome, <span className={classes.username}>{props.sessionName}</span>
         </h2>

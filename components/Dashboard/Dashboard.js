@@ -41,9 +41,9 @@ const Dashboard = (props) => {
             0
           );
           setExpenseAmount(expenseAmt?.toFixed(2));
-          setIsLoading(false);
         }
       }
+      setIsLoading(false);
     };
     if (session?.user?.email) {
       fetchExpenses();
