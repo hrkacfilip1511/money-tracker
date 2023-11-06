@@ -13,6 +13,7 @@ const Auth = (props) => {
   if (session?.user?.email) {
     router.replace("/");
   }
+  const [error, setError] = useState("");
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
@@ -30,6 +31,9 @@ const Auth = (props) => {
         email: enteredEmail,
         password: enteredPassword,
       });
+      if (result.status === 401) {
+        setError(result.error);
+      }
       if (result.status === 200) {
         router.replace("/");
       }
@@ -88,6 +92,7 @@ const Auth = (props) => {
             </div>
           </>
         )}
+        {error.length > 0 && <span className={classes.errorMsg}>{error}</span>}
         <div className={classes.actions}>
           <button className={classes.submitBtn}>
             {isLogin ? "Login" : "Sign up"}

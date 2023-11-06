@@ -22,7 +22,7 @@ export const authOptions = {
           user.password
         );
         if (!isValidPassword) {
-          throw new Error("Password is not correct. Plese try again.");
+          throw new Error("Password is not correct. Please try again.");
         }
         client.close();
         return {
