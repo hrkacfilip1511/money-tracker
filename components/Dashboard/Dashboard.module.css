@@ -1,13 +1,14 @@
 .homepageContent {
   display: flex;
-  position: absolute;
+  position: relative;
   left: 290px;
-  top: 120px;
+  transform: translateY(-600px);
   flex-direction: column;
-  align-items: self-start;
   /* background: linear-gradient(rgb(253, 202, 253), rgb(231, 108, 231)); */
   padding: 20px;
-  /* width: 1200px; */
+  width: 1200px;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(248, 247, 246);
   border-radius: 10px;
 }
