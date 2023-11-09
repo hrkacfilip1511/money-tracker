@@ -55,3 +55,9 @@
   color: rgb(66, 65, 65);
   font-style: italic;
 }
+@media screen and (max-width: 520px) {
+  .expenseImage{
+    height: 60px;
+    width: 13%;
+  }
+}

@@ -114,3 +114,18 @@
 
   background-color: rgb(255, 76, 32);
 }
+@media screen and (max-width: 520px) {
+  .paymentCategoriesContainer {
+    width: 100%;
+    margin-left: 0;
+    padding: 7px 0;
+  }
+  .sliceCash,
+.sliceCard{
+  width: 100px;
+  height: 100px;
+}
+.legend {
+  width: 45%;
+}
+}

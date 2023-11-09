@@ -25,7 +25,6 @@
   align-items: center;
 }
 .details .title {
-  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -53,3 +52,15 @@
   font-size: 1rem;
   transition: width 0.3s ease-in-out;
 }
+@media screen and (max-width: 520px) {
+  .categoryExpense {
+    min-height: 20px;
+  }
+  .title{
+    text-align: center;
+    font-size: 1rem;
+  }
+  .bigName {
+    font-size: 0.7rem;
+  }
+  }

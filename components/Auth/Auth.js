@@ -4,12 +4,14 @@ import { useRef } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import useStore from "../../store/useStore";
+import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 const Auth = (props) => {
   const [isLogin, setisLogin] = useState(true);
   const [isCheckedTerms, setIsCheckedTerms] = useState(false);
   const [errorCheckBoxClass, setErrorCheckBoxClass] = useState(false);
   const router = useRouter();
   const session = useStore((state) => state.session);
+  const [isLoading, setIsLoading] = useState(false);
   if (session?.user?.email) {
     router.replace("/");
   }
@@ -19,6 +21,7 @@ const Auth = (props) => {
   const nameRef = useRef();
   const budgetRef = useRef();
   const submitFormHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
@@ -31,6 +34,8 @@ const Auth = (props) => {
         email: enteredEmail,
         password: enteredPassword,
       });
+      setIsLoading(false);
+
       if (result.status === 401) {
         setError(result.error);
       }
@@ -104,6 +109,11 @@ const Auth = (props) => {
           >
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>
+          {isLoading && (
+            <div style={{ marginTop: "10px" }}>
+              <LoadingSpinner width={40} height={40} />{" "}
+            </div>
+          )}
         </div>
       </form>
     </div>

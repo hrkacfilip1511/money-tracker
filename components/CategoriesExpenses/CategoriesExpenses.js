@@ -30,6 +30,7 @@ const CategoriesExpenses = ({ expenses, expenseAmount }) => {
   });
   return (
     <div className={classes.categoriesExpenses}>
+      <h2 className={classes.title}>Expenses by categories</h2>
       {expensesByCategories.length > 0 &&
         expensesByCategories
           .sort((a, b) => b.amount - a.amount)

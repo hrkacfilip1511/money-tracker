@@ -151,7 +151,7 @@
 .submitExpense {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+margin-top: 30px;
 }
 .submitExpense button {
   border: none;
@@ -165,4 +165,42 @@
 }
 .submitExpense button:hover {
   opacity: 0.7;
+}
+@media screen and (max-width: 520px) {
+  .expenseFormContainer {
+    width: 97%;
+    left: 50%;
+    top: 20%;
+    }
+  .expenseSplitted{
+    flex-direction: column;
+  }
+  .secondInfo{
+    width: 100%;
+  }
+  .firstInfo {
+    width: 100%;
+    border: none;
+  }
+  .expenseNumbers{
+    flex-direction: column;
+  }
+  .expenseAmount, .expenseQuantity{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+  }
+  .expenseAmount label{
+    margin-bottom: 0px;
+  }
+  .expenseQuantity label{
+    margin-bottom: 0px;
+  }
+  .expenseDescription{
+    margin-top: 15px;
+  }
+  .submitExpense button{
+    color: white;
+  }
 }

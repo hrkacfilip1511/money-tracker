@@ -18,13 +18,17 @@
 }
 @media screen and (max-width: 520px) {
   .homepageContent {
-    top: 200px;
+    top: 150px;
     width: 100%;
     left: 0px;
     transform: translate(0);
-    padding: 20px 0 0;
+    padding: 0px 7px;
   }
   .expensesMoreDetails{
     width: 100%;
+  }
+  .expensesMoreDetails{
+    flex-direction: column;
+    padding: 0px 7px;
   }
 }

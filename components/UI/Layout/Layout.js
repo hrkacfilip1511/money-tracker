@@ -8,10 +8,13 @@ const Layout = (props) => {
   const { data: session, status } = useSession();
   const setSession = useStore((state) => state?.setSession);
   const router = useRouter();
+  const sessionn = useStore((state) => state.session);
   useEffect(() => {
     if (session) {
       setSession(session);
-    } else {
+    }
+
+    if (session === null) {
       router.push("/auth");
     }
   }, [session]);

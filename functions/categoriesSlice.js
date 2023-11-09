@@ -1,5 +1,5 @@
 const categoriesSlice = (set, get) => ({
-  session: {},
+  session: null,
   setSession: (session) => {
     set({ session: session });
   },

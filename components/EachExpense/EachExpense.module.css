@@ -6,14 +6,13 @@
     width: 500px;
     display: flex;
     flex-direction: column;
-    background-color: rgb(89, 218, 132);
+    background-color: rgb(213, 216, 214);
 
 }
 .icon{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(11, 143, 81);
 }
 .icon img{
     margin: 5px 0;
@@ -21,7 +20,6 @@
 .title{
     display: flex;
     justify-content: center;
-    background-color: rgb(11, 143, 81);
     padding: 10px 0;
 
 }
@@ -89,6 +87,7 @@
     border-radius: 5px;
     width: 150px;
     margin-left: 5px;
+    border:none
 
 }
 .options .date input {
@@ -97,6 +96,7 @@
     border-radius: 5px;
     width: 150px;
     margin-right: 5px;
+    border: none;
 
 }
 
@@ -197,4 +197,42 @@
   }
   .deleteBtn:hover{
     opacity: 0.8;
+  }
+  @media screen and (max-width: 520px){
+    .itemContainer {
+      left: 0;
+      width: 95%;
+      background-color: rgb(214, 190, 146);
+      margin-left: 2.5%;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+    .icon {
+      background-color: rgb(252, 170, 252);
+    }
+    .title {
+      background-color: none;
+
+    }
+    .numbers{
+      flex-direction: column;
+    }
+    .amount {
+      width: 50%;
+    }
+    .quantity {
+      margin: 15px 0;
+      align-items: start;
+      margin-left: 5px;
+
+    }
+    .methods {
+      width: 60%;
+    }
+    .methodOne {
+      min-width: 100px;
+    }
+    .methodTwo {
+      min-width: 100px;
+    }
+    
   }

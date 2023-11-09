@@ -1,13 +1,9 @@
 import Image from "next/image";
 import classes from "./ComingSoon.module.css";
+import useStore from "../../../store/useStore";
 
 const ComingSoon = () => {
-  function checkDeviceType() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-  }
-  const isMobile = checkDeviceType();
+  const isMobile = useStore((state) => state.isMobile);
   return (
     <div className={classes.contentContainer}>
       <div className={classes.contentImage}>

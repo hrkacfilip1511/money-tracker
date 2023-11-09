@@ -70,7 +70,7 @@ const Dashboard = (props) => {
         userBalance={userBalance}
       />
       <div className={classes.expensesMoreDetails}>
-        <>
+        <div>
           <ExpenseFilter
             date={date}
             expensesLength={
@@ -82,20 +82,20 @@ const Dashboard = (props) => {
             setOrderBy={setOrderBy}
             orderBy={orderBy}
           />
-          {/* <Expenses
+          <Expenses
             isLoading={isLoading}
             expenses={
               searchFilteredExpenses.length > 0
                 ? searchFilteredExpenses
                 : expenses
             }
-          /> */}
-        </>
-        {/* <Payments expenses={expenses} /> */}
+          />
+        </div>
+        <Payments expenses={expenses} />
       </div>
-      {/* {expenses?.length > 0 && (
+      {expenses?.length > 0 && (
         <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
-      )} */}
+      )}
     </div>
   );
 };
