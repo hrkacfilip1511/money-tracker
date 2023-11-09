@@ -163,7 +163,7 @@ const ExpenseForm = () => {
                 <textarea
                   id="expenseDetails"
                   rows={15}
-                  cols={50}
+                  cols={47}
                   placeholder="Add expense details (optional)"
                   ref={detailsRef}
                 />

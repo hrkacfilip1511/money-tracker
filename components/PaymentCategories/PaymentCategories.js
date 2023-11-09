@@ -1,10 +1,12 @@
 import Image from "next/image";
 import classes from "./PaymentCategories.module.css";
+import useStore from "../../store/useStore";
 
 const Payments = ({ expenses }) => {
   const expensesByCash = expenses?.filter(
     (expense) => expense.paymentMethod === "cash"
   );
+  const isMobile = useStore((state) => state.isMobile);
   const expensesByCreditCard = expenses?.filter(
     (expense) => expense.paymentMethod === "credit-card"
   );
@@ -19,8 +21,8 @@ const Payments = ({ expenses }) => {
             <Image
               src={"/assets/icons/credit-card_v2.png"}
               alt="credit-card"
-              width={90}
-              height={90}
+              width={isMobile ? 60 : 90}
+              height={isMobile ? 60 : 90}
             />
             <span>{expensesByCreditCard.length}</span>
           </div>
@@ -28,8 +30,8 @@ const Payments = ({ expenses }) => {
             <Image
               src={"/assets/icons/cash_v2.png"}
               alt="credit-card"
-              width={90}
-              height={90}
+              width={isMobile ? 60 : 90}
+              height={isMobile ? 60 : 90}
             />
             <span>{expensesByCash.length}</span>
           </div>

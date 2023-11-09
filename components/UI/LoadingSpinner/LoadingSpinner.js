@@ -1,7 +1,12 @@
 import classes from "./LoadingSpinner.module.css";
 
-const LoadingSpinner = () => {
-  return <div className={classes.loaderItem}></div>;
+const LoadingSpinner = ({ width, height }) => {
+  return (
+    <div
+      className={classes.loaderItem}
+      style={{ width: `${width}px`, height: `${height}px` }}
+    ></div>
+  );
 };
 
 export default LoadingSpinner;

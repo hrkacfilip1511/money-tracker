@@ -18,7 +18,13 @@ const CategoryExpensesItem = ({
         />
       </div>
       <div className={classes.details}>
-        <span className={classes.title}>{categoryName}</span>
+        <span
+          className={`${classes.title} ${
+            categoryName.length > 13 ? classes.bigName : ""
+          }`}
+        >
+          {categoryName}
+        </span>
         <span className={classes.amount}>
           <span className={classes.moneyType}>KM</span> {categoryAmount}
         </span>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import classes from "./MainNavigation.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
-import { CiSearch, CiUser } from "react-icons/ci";
+import { CiSearch, CiUser, CiLogout } from "react-icons/ci";
 import { GoGoal } from "react-icons/go";
 import {
   MdOutlineSpaceDashboard,
@@ -21,6 +21,8 @@ const MainNavigation = (props) => {
   const setSearchVal = useStore((state) => state.setSearchVal);
   const setIsSearching = useStore((state) => state.setIsSearching);
   const searchValue = useStore((state) => state.searchVal);
+  const setIsMobile = useStore((state) => state.setIsMobile);
+  const isMobile = useStore((state) => state.isMobile);
   const signOutHandler = () => {
     signOut();
     router.replace("/auth");
@@ -33,43 +35,62 @@ const MainNavigation = (props) => {
     setSearchVal(e.target.value);
   };
 
+  useEffect(() => {
+    function checkDeviceType() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+    }
+    const isMobile = checkDeviceType();
+    setIsMobile(isMobile);
+  }, []);
   return (
-    <div className={classes.barNavigation}>
+    <div
+      className={classes.barNavigation}
+      style={{ zIndex: isSidebarShowed ? "5" : "0" }}
+    >
       <div className={classes.mainAppHeading}>
         <h1 className={classes.appName}>PayTracker</h1>
         <h2>
-          Welcome, <span className={classes.username}>{props.sessionName}</span>
+          Welcome,<span className={classes.username}>{props.sessionName}</span>
         </h2>
-        <div className={classes.searchingTransaction}>
-          {router.pathname === "/" && (
-            <div className={classes.searchForm}>
-              <CiSearch />
-              <input
-                value={searchValue}
-                type="text"
-                placeholder="Search transactions"
-                onChange={searchHandler}
-                onFocus={() => setIsSearching(true)}
-                onBlur={() => {
-                  setSearchVal("");
-                  setIsSearching(false);
-                }}
-              />
-            </div>
-          )}
-        </div>
-        <div className={classes.avatar}>
-          <CiUser
-            onClick={() => setIsProfilOptionOpened((prevBool) => !prevBool)}
-          />
-          {isProfilOptionOpened && (
-            <div className={classes.profileOptions}>
-              <span className={classes.signOutOption} onClick={signOutHandler}>
-                Sign out
-              </span>
-            </div>
-          )}
-        </div>
+        {isMobile && router.pathname !== "/" ? null : (
+          <div className={classes.searchingTransaction}>
+            {router.pathname === "/" && (
+              <div className={classes.searchForm}>
+                <CiSearch />
+                <input
+                  value={searchValue}
+                  type="text"
+                  placeholder="Search transactions"
+                  onChange={searchHandler}
+                  onFocus={() => setIsSearching(true)}
+                  onBlur={() => {
+                    setSearchVal("");
+                    setIsSearching(false);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )}
+        {!isMobile && (
+          <div className={classes.avatar}>
+            <CiUser
+              onClick={() => setIsProfilOptionOpened((prevBool) => !prevBool)}
+            />
+            {isProfilOptionOpened && (
+              <div className={classes.profileOptions}>
+                <span
+                  className={classes.signOutOption}
+                  onClick={signOutHandler}
+                >
+                  Sign out
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div
         className={`${classes.sidebar} ${
@@ -105,6 +126,12 @@ const MainNavigation = (props) => {
             <GoGoal />
             <span>Goals</span>
           </Link>
+          {isMobile && (
+            <div onClick={signOutHandler} className={classes.navLink}>
+              <CiLogout />
+              <span>Logout</span>
+            </div>
+          )}
         </div>
         <div
           className={`${classes.menuOption} ${

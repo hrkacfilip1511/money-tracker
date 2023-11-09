@@ -38,7 +38,6 @@ const EachExpense = ({ expenseData }) => {
     )?.categoryImage;
   }
   const editHandler = async () => {
-    console.log(new Date(date));
     const data = {
       email: session?.user?.email,
       expenseId: expenseData.expenseId,

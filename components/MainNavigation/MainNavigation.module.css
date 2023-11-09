@@ -82,12 +82,12 @@
   background-color: rgb(35, 36, 35);
   color: white;
   width: 220px;
-  height: 100vh;
+  border-bottom-right-radius: 10px;
 }
 .navLink {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin: 10px 0;
   padding: 10px;
 }
 .navLink svg {
@@ -133,4 +133,66 @@
 
 .active .menuBar:nth-child(3) {
   transform: translateY(-5px) rotate(-45deg);
+}
+
+@media screen and (max-width: 550px){
+  .barNavigation {
+    position: absolute;
+    width: 100%;
+
+  }
+  .appName{
+    margin-left: 7px;
+    font-size: 1.2rem;
+    width: 28%;
+  }
+  .mainAppHeading h2 {
+    width: 33%;
+    font-size: 0.9rem;
+    margin-left: 5px;
+    letter-spacing: 0.8px;
+  }
+  .mainAppHeading .username{
+    	font-size: 1rem;
+  }
+  .searchingTransaction {
+    width: 35%;
+    padding: 5px;
+  }
+  .searchForm {
+    padding: 5px;
+  }
+  .searchingTransaction input::placeholder{
+    font-size: 0.7rem;
+  }
+  .menuBar{
+    width: 25px;
+    height: 2px;
+    margin: 1.8px 0;
+  }
+  .navigation {
+    width: 180px;
+  }
+
+  .hideSidebar {
+    transform: translateX(-180px);
+    transition: transform 0.3s ease-in;
+  }
+  .navLink {
+    margin: 7px 0;
+    padding: 6px;
+  }
+  .navLink svg {
+    font-size: 1.1rem;
+    margin-right:15px;
+  margin-left: 10px;
+  }
+  .navLink span {
+    letter-spacing: 0.4px;
+    font-size: 0.8rem;
+  }
+  .navLink:hover {
+    background-color: transparent;
+  }
+
 }

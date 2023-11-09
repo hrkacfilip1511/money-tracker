@@ -1,8 +1,10 @@
 import Image from "next/image";
 import classes from "./MonthlyOverviewItem.module.css";
+import useStore from "../../store/useStore";
 
 const MonthlyOverviewItem = ({ imageName, title, value, className }) => {
   let css = className;
+  const isMobile = useStore((state) => state.isMobile);
   const getAditionedClassname = () => {
     switch (className) {
       case "income":
@@ -19,13 +21,15 @@ const MonthlyOverviewItem = ({ imageName, title, value, className }) => {
     <div className={`${classes.overviewItem} ${getAditionedClassname()}`}>
       <Image
         src={`/assets/icons/${imageName}`}
-        width={40}
-        height={40}
+        width={isMobile ? 20 : 40}
+        height={isMobile ? 20 : 40}
         alt={title}
       />
       <div className={classes.overviewItemInfo}>
-        <span>{title}</span>
-        <span>KM {value}</span>
+        <span className={classes.title}>{title}</span>
+        <span className={classes.value}>
+          <span className={classes.valueType}>KM</span> {value}
+        </span>
       </div>
     </div>
   );

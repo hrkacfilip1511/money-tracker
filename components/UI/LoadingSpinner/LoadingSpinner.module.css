@@ -1,7 +1,6 @@
 
 .loaderItem{
-    width: 60px;
-    height: 60px;
+    
     border-radius: 50%;
     border: 6px solid rgb(200, 204, 204);
     border-top: 6px solid rgb(64, 64, 250);

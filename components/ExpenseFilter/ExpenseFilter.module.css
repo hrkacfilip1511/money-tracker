@@ -86,3 +86,27 @@
   cursor: default;
   color: aliceblue;
 }
+
+@media screen and (max-width: 520px) {
+  .filterBoard {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .findedExpenses {
+    text-align: center;
+  }
+  .findedExpensesTitle{
+    font-size: 0.8rem;
+  }
+  .findedExpensesValue {
+    width: 18px;
+    font-size: 0.9rem;
+    height: 18px;
+  }
+  .dateVal {
+    font-size: 0.9rem;
+  }
+  .filterByDate select {
+    padding: 6px 0;
+  }
+}

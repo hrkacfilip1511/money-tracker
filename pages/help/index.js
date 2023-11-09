@@ -1,4 +1,4 @@
-import ComingSoon from "../../components/ComingSoon/ComingSoon";
+import ComingSoon from "../../components/UI/ComingSoon/ComingSoon";
 
 const Help = () => {
   return <ComingSoon />;

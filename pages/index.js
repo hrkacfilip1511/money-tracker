@@ -14,9 +14,5 @@ export default function Home(props) {
     };
     fetchCategories();
   }, []);
-  return (
-    <div>
-      <Dashboard />
-    </div>
-  );
+  return <Dashboard />;
 }
