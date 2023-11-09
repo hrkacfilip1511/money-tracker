@@ -2,14 +2,20 @@ import Image from "next/image";
 import classes from "./ComingSoon.module.css";
 
 const ComingSoon = () => {
+  function checkDeviceType() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  }
+  const isMobile = checkDeviceType();
   return (
     <div className={classes.contentContainer}>
       <div className={classes.contentImage}>
         <Image
           src={"/assets/bg/builders.png"}
           alt="builders"
-          width={360}
-          height={460}
+          width={isMobile ? 200 : 360}
+          height={isMobile ? 260 : 460}
         />
       </div>
       <div className={classes.contentTitle}>

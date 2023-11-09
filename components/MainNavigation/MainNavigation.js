@@ -21,7 +21,8 @@ const MainNavigation = (props) => {
   const setSearchVal = useStore((state) => state.setSearchVal);
   const setIsSearching = useStore((state) => state.setIsSearching);
   const searchValue = useStore((state) => state.searchVal);
-  const [isMobile, setIsMobile] = useState(false);
+  const setIsMobile = useStore((state) => state.setIsMobile);
+  const isMobile = useStore((state) => state.isMobile);
   const signOutHandler = () => {
     signOut();
     router.replace("/auth");
@@ -44,30 +45,35 @@ const MainNavigation = (props) => {
     setIsMobile(isMobile);
   }, []);
   return (
-    <div className={classes.barNavigation}>
+    <div
+      className={classes.barNavigation}
+      style={{ zIndex: isSidebarShowed ? "5" : "0" }}
+    >
       <div className={classes.mainAppHeading}>
         <h1 className={classes.appName}>PayTracker</h1>
         <h2>
-          Welcome, <span className={classes.username}>{props.sessionName}</span>
+          Welcome,<span className={classes.username}>{props.sessionName}</span>
         </h2>
-        <div className={classes.searchingTransaction}>
-          {router.pathname === "/" && (
-            <div className={classes.searchForm}>
-              <CiSearch />
-              <input
-                value={searchValue}
-                type="text"
-                placeholder="Search transactions"
-                onChange={searchHandler}
-                onFocus={() => setIsSearching(true)}
-                onBlur={() => {
-                  setSearchVal("");
-                  setIsSearching(false);
-                }}
-              />
-            </div>
-          )}
-        </div>
+        {isMobile && router.pathname !== "/" ? null : (
+          <div className={classes.searchingTransaction}>
+            {router.pathname === "/" && (
+              <div className={classes.searchForm}>
+                <CiSearch />
+                <input
+                  value={searchValue}
+                  type="text"
+                  placeholder="Search transactions"
+                  onChange={searchHandler}
+                  onFocus={() => setIsSearching(true)}
+                  onBlur={() => {
+                    setSearchVal("");
+                    setIsSearching(false);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )}
         {!isMobile && (
           <div className={classes.avatar}>
             <CiUser

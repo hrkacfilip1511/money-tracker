@@ -139,6 +139,7 @@
   .barNavigation {
     position: absolute;
     width: 100%;
+
   }
   .appName{
     margin-left: 7px;
@@ -172,6 +173,7 @@
   .navigation {
     width: 180px;
   }
+
   .hideSidebar {
     transform: translateX(-180px);
     transition: transform 0.3s ease-in;
@@ -192,4 +194,5 @@
   .navLink:hover {
     background-color: transparent;
   }
+
 }

@@ -84,7 +84,7 @@ const ExpenseFilter = (props) => {
         >
           <AiOutlineArrowLeft />
         </div>
-        <span>{formattedDate}</span>
+        <span className={classes.dateVal}>{formattedDate}</span>
         <div
           className={`${classes.arrow} ${
             buttonDisabledOptions.rightArror ? classes.disabled : ""

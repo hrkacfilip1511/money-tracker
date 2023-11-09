@@ -6,3 +6,9 @@
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 520px) {
+.expensesMainInfo {
+  width: 100%;
+  margin-bottom: 25px;
+}
+}

@@ -7,6 +7,10 @@ const categoriesSlice = (set, get) => ({
   setCategories: (categories) => {
     set({ categories: categories });
   },
+  isMobile: true,
+  setIsMobile: (boolVal) => {
+    set({ isMobile: boolVal });
+  },
 });
 
 export default categoriesSlice;
