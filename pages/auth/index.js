@@ -17,7 +17,6 @@ const Authentication = (props) => {
       },
     });
     setIsLoading(false);
-    console.log(response);
     if (response.status === 200) {
       setErrorMsg("");
       window.location.href = "/auth";
