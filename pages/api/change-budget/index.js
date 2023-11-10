@@ -15,13 +15,15 @@ const handler = async (req, res) => {
       client.close();
     }
 
+    if (parsedBudget <= 0) {
+      res.status(403).json({ message: "Budget must be greater than 0!" });
+      client.close();
+    }
+
     const newBudgetData = await client
       .db()
       .collection("users")
-      .updateOne(
-        { email: email },
-        { $set: { budget: parsedBudget.toString() } }
-      );
+      .updateOne({ email: email }, { $set: { budget: parsedBudget } });
     if (newBudgetData.modifiedCount !== 0) {
       res
         .status(200)

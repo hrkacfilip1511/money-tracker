@@ -17,7 +17,6 @@
   color: rgb(136, 136, 112);
 }
 .overviewItemInfo span:nth-child(2) {
-  color: rgb(0, 0, 0);
   font-weight: 600;
 }
 .income {
@@ -31,6 +30,9 @@
 .balance {
   border: 2px solid goldenrod;
   border-radius: 15px;
+}
+.negativeValue{
+  color: red;
 }
 @media screen and (max-width: 520px) {
   .overviewItem {
@@ -51,5 +53,6 @@
   .valueType{
     font-size: 0.6rem;
     font-weight: 700;
+    margin-right: 2px;
   }
   }

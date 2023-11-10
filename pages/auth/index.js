@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import Auth from "../../components/Auth/Auth";
+import { Fragment } from "react";
+import Head from "next/head";
 
 const Authentication = (props) => {
   const router = useRouter();
@@ -17,9 +19,12 @@ const Authentication = (props) => {
     const data = await response.json();
   };
   return (
-    <div>
+    <Fragment>
+      <Head>
+        <title>Auth</title>
+      </Head>
       <Auth onSignUp={signupHandler} />
-    </div>
+    </Fragment>
   );
 };
 
