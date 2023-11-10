@@ -116,6 +116,7 @@ const EachExpense = ({ expenseData }) => {
       </div>
       <div className={classes.options}>
         <div className={classes.categories}>
+          <label>Select category</label>
           <select value={selectedCategory} onChange={categoryHandler}>
             {categories?.map((category) => {
               return (
@@ -125,6 +126,7 @@ const EachExpense = ({ expenseData }) => {
           </select>
         </div>
         <div className={classes.date}>
+          <label htmlFor="date">Pick a date</label>
           <input
             type="date"
             id="date"
