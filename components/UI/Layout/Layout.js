@@ -10,6 +10,7 @@ const Layout = (props) => {
   const router = useRouter();
   const version = require("../../../package.json").version;
   const [isScrolledToTheBottom, setIsScrolledToTheBottom] = useState(false);
+  console.log(router);
   useEffect(() => {
     if (session) {
       setSession(session);
@@ -18,7 +19,7 @@ const Layout = (props) => {
     if (session === null) {
       router.push("/auth");
     }
-  }, [session]);
+  }, [session, router.route]);
 
   useEffect(() => {
     window.onscroll = function () {
