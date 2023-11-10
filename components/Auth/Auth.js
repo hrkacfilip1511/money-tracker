@@ -99,9 +99,10 @@ const Auth = (props) => {
             </div>
           </>
         )}
-        {error.length > 0 || props.errorMsg.length > 0 ? (
-          <span className={classes.errorMsg}>{error}</span>
+        {props.errorMsg.length > 0 ? (
+          <span className={classes.errorMsg}>{props.errorMsg}</span>
         ) : null}
+        {error.length > 0 && <span className={classes.errorMsg}>{error}</span>}
         <div className={classes.actions}>
           <button className={classes.submitBtn}>
             {isLogin ? "Login" : "Sign up"}
