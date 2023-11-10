@@ -1,11 +1,14 @@
 import { useRouter } from "next/router";
 import Auth from "../../components/Auth/Auth";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Head from "next/head";
 
 const Authentication = (props) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const signupHandler = async (userData) => {
+    setIsLoading(true);
     const response = await fetch("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify(userData),
@@ -13,17 +16,27 @@ const Authentication = (props) => {
         "Content-Type": "application/json",
       },
     });
-    if (response.status === 200) {
-      router.reload();
-    }
+    setIsLoading(false);
     const data = await response.json();
+    console.log(response);
+    console.log(data);
+    if (response.status === 200) {
+      setErrorMsg("");
+      window.location.href = "/auth";
+    } else {
+      setErrorMsg(data.message);
+    }
   };
   return (
     <Fragment>
       <Head>
         <title>Auth</title>
       </Head>
-      <Auth onSignUp={signupHandler} />
+      <Auth
+        onSignUp={signupHandler}
+        isLoading={isLoading}
+        errorMsg={errorMsg}
+      />
     </Fragment>
   );
 };

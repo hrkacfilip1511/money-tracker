@@ -21,7 +21,6 @@ const Auth = (props) => {
   const nameRef = useRef();
   const budgetRef = useRef();
   const submitFormHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
@@ -29,6 +28,8 @@ const Auth = (props) => {
     const enteredBudget = !isLogin ? budgetRef.current.value : 0;
 
     if (isLogin) {
+      setIsLoading(true);
+
       const result = await signIn("credentials", {
         redirect: false,
         email: enteredEmail,
@@ -41,6 +42,7 @@ const Auth = (props) => {
       }
       if (result.status === 200) {
         router.replace("/");
+        setError("");
       }
     } else {
       const usersData = {
@@ -97,7 +99,9 @@ const Auth = (props) => {
             </div>
           </>
         )}
-        {error.length > 0 && <span className={classes.errorMsg}>{error}</span>}
+        {error.length > 0 || props.errorMsg.length > 0 ? (
+          <span className={classes.errorMsg}>{error}</span>
+        ) : null}
         <div className={classes.actions}>
           <button className={classes.submitBtn}>
             {isLogin ? "Login" : "Sign up"}
@@ -105,15 +109,18 @@ const Auth = (props) => {
           <button
             className={classes.switchBtn}
             type="button"
-            onClick={() => setisLogin((prev) => !prev)}
+            onClick={() => {
+              setError("");
+              setisLogin((prev) => !prev);
+            }}
           >
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>
-          {isLoading && (
+          {isLoading || props.isLoading ? (
             <div style={{ marginTop: "10px" }}>
               <LoadingSpinner width={40} height={40} />{" "}
             </div>
-          )}
+          ) : null}
         </div>
       </form>
     </div>
