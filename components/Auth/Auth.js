@@ -99,7 +99,10 @@ const Auth = (props) => {
             </div>
           </>
         )}
-        {error.length > 0 || props.errorMsg.length > 0 ? (
+        {props.errorMsg.length > 0 ? (
+          <span className={classes.errorMsg}>{props.errorMsg}</span>
+        ) : null}
+        {error.length > 0 ? (
           <span className={classes.errorMsg}>{error}</span>
         ) : null}
         <div className={classes.actions}>
