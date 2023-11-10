@@ -17,13 +17,12 @@ const Authentication = (props) => {
       },
     });
     setIsLoading(false);
-    const data = await response.json();
-    console.log(response);
-    console.log(data);
+
     if (response.status === 200) {
       setErrorMsg("");
       window.location.href = "/auth";
     } else {
+      const data = await response.json();
       setErrorMsg(data.message);
     }
   };
