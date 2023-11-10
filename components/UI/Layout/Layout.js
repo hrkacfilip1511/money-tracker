@@ -2,13 +2,14 @@ import { useRouter } from "next/router";
 import MainNavigation from "../../MainNavigation/MainNavigation";
 import { useSession } from "next-auth/react";
 import useStore from "../../../store/useStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Layout.module.css";
 const Layout = (props) => {
   const { data: session, status } = useSession();
   const setSession = useStore((state) => state?.setSession);
   const router = useRouter();
   const version = require("../../../package.json").version;
+  const [isScrolledToTheBottom, setIsScrolledToTheBottom] = useState(false);
   useEffect(() => {
     if (session) {
       setSession(session);
@@ -19,11 +20,28 @@ const Layout = (props) => {
     }
   }, [session]);
 
+  useEffect(() => {
+    window.onscroll = function () {
+      if (
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight
+      ) {
+        setIsScrolledToTheBottom(true);
+      } else {
+        setIsScrolledToTheBottom(false);
+      }
+    };
+  }, []);
+
   return (
     <div>
       {session && <MainNavigation sessionName={session.user.name} />}
       {props.children}
-      <footer className={classes.footer}>
+      <footer
+        className={`${classes.footer} ${
+          isScrolledToTheBottom ? classes.showFooter : ""
+        }`}
+      >
         <span className={classes.footerTxt}>
           PayTracker © All rights reserved
         </span>

@@ -87,14 +87,19 @@
     border-radius: 5px;
     width: 150px;
     margin-left: 5px;
-    border:none
+    border:none;
+    margin-top: 3px;
 
+}
+.categories label {
+  margin-left: 5px;
 }
 .options .date input {
     cursor: pointer;
     padding: 8px 5px;
     border-radius: 5px;
     width: 150px;
+    margin-top: 3px;
     margin-right: 5px;
     border: none;
 
