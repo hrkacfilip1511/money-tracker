@@ -38,6 +38,12 @@ const handler = async (req, res) => {
       return;
     }
 
+    if (parsedBudget <= 0) {
+      res.status(409).json({ message: "Budget must be greater than 0!" });
+      client.close();
+      return;
+    }
+
     const hashedPassword = await hashPassword(password);
     const result = await client.db().collection("users").insertOne({
       name: name,
@@ -45,9 +51,9 @@ const handler = async (req, res) => {
       password: hashedPassword,
       budget: parsedBudget,
     });
+    res.status(200).json({ message: "User created!" });
+    client.close();
   }
-  res.status(200).json({ message: "User created!" });
-  client.close();
 };
 
 export default handler;
