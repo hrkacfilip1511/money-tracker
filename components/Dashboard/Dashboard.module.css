@@ -23,6 +23,7 @@
     left: 0px;
     transform: translate(0);
     padding: 0px 7px;
+    height: 100%;
   }
   .expensesMoreDetails{
     width: 100%;

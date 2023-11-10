@@ -198,6 +198,12 @@
   .deleteBtn:hover{
     opacity: 0.8;
   }
+  .spinner{
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   @media screen and (max-width: 520px){
     .itemContainer {
       left: 0;

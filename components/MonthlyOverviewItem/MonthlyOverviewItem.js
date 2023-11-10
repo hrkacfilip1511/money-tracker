@@ -28,7 +28,16 @@ const MonthlyOverviewItem = ({ imageName, title, value, className }) => {
       <div className={classes.overviewItemInfo}>
         <span className={classes.title}>{title}</span>
         <span className={classes.value}>
-          <span className={classes.valueType}>KM</span> {value}
+          <span className={classes.valueType}>KM</span>
+          <span
+            className={` ${
+              className === "balance" && parseFloat(value) < 0
+                ? classes.negativeValue
+                : ""
+            }`}
+          >
+            {value}
+          </span>
         </span>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import useStore from "../../store/useStore";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import EachExpense from "../../components/EachExpense/EachExpense";
+import Head from "next/head";
 
 const ExpenseItemById = () => {
   const session = useStore((state) => state.session);
@@ -33,9 +34,12 @@ const ExpenseItemById = () => {
   return !expenseData?.title ? (
     <h1>Loading...</h1>
   ) : (
-    <div>
+    <Fragment>
+      <Head>
+        <title>Expense - {route.query.expenseId}</title>
+      </Head>
       <EachExpense expenseData={expenseData} />
-    </div>
+    </Fragment>
   );
 };
 

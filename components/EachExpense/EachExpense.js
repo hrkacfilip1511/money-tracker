@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import classes from "./EachExpense.module.css";
 import Image from "next/image";
 import useStore from "../../store/useStore";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const EachExpense = ({ expenseData }) => {
   const [categories, setCategories] = useState([]);
@@ -15,6 +16,7 @@ const EachExpense = ({ expenseData }) => {
   const [selectedCategory, setSelectedCategory] = useState(
     expenseData?.category
   );
+  const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState();
   const [details, setDetails] = useState(expenseData?.details);
   useEffect(() => {
@@ -38,6 +40,7 @@ const EachExpense = ({ expenseData }) => {
     )?.categoryImage;
   }
   const editHandler = async () => {
+    setIsLoading(true);
     const data = {
       email: session?.user?.email,
       expenseId: expenseData.expenseId,
@@ -56,17 +59,20 @@ const EachExpense = ({ expenseData }) => {
       },
       body: JSON.stringify(data),
     });
+    setIsLoading(false);
     if (response.status === 201) {
       window.location.href = "/";
     }
   };
   const deleteExpense = async () => {
+    setIsLoading(true);
     const response = await fetch(
       `/api/delete-expense/?email=${session?.user?.email}&expenseId=${expenseData?.expenseId}`,
       {
         method: "DELETE",
       }
     );
+    setIsLoading(false);
     if (response.status === 201) {
       window.location.href = "/";
     }
@@ -174,6 +180,11 @@ const EachExpense = ({ expenseData }) => {
           Delete
         </button>
       </div>
+      {isLoading && (
+        <div className={classes.spinner}>
+          <LoadingSpinner width={30} height={30} />
+        </div>
+      )}
     </div>
   );
 };

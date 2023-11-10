@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import useStore from "../store/useStore";
+import Head from "next/head";
 
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
@@ -14,5 +15,12 @@ export default function Home(props) {
     };
     fetchCategories();
   }, []);
-  return <Dashboard />;
+  return (
+    <Fragment>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <Dashboard />
+    </Fragment>
+  );
 }
