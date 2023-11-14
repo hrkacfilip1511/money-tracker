@@ -20,14 +20,6 @@ const ExpenseItemById = ({ expenseData }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  }
   const query = context.query;
   const expensesByEmail = await fetchExpensesByEmail(session?.user?.email);
 
