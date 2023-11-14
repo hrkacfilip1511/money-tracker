@@ -10,7 +10,6 @@ const Layout = (props) => {
   const router = useRouter();
   const version = require("../../../package.json").version;
   const [isScrolledToTheBottom, setIsScrolledToTheBottom] = useState(false);
-  console.log(router);
   useEffect(() => {
     if (session) {
       setSession(session);

@@ -1,39 +1,14 @@
 import { useRouter } from "next/router";
 import useStore from "../../store/useStore";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import EachExpense from "../../components/EachExpense/EachExpense";
 import Head from "next/head";
-
-const ExpenseItemById = () => {
-  const session = useStore((state) => state.session);
-  const [expenseData, setExpenseData] = useState({});
+import { fetchExpensesByEmail } from "../../lib/expense-data";
+import { getSession } from "next-auth/react";
+const ExpenseItemById = ({ expenseData }) => {
   const route = useRouter();
 
-  useEffect(() => {
-    const fetchExpenseItem = async () => {
-      const data = {
-        email: session.user.email,
-        expenseId: route.query.expenseId,
-      };
-      const response = await fetch("/api/expense-item", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const resData = await response.json();
-      if (resData) {
-        setExpenseData(resData.expense);
-      }
-    };
-    if (session?.user) {
-      fetchExpenseItem();
-    }
-  }, [session?.user?.email]);
-  return !expenseData?.title ? (
-    <h1>Loading...</h1>
-  ) : (
+  return (
     <Fragment>
       <Head>
         <title>Expense - {route.query.expenseId}</title>
@@ -43,4 +18,27 @@ const ExpenseItemById = () => {
   );
 };
 
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  }
+  const query = context.query;
+  const expensesByEmail = await fetchExpensesByEmail(session?.user?.email);
+
+  const filteredExpense = expensesByEmail.find(
+    (expense) => expense.expenseId.toString() === query.expenseId
+  );
+
+  return {
+    props: {
+      expenseData: filteredExpense,
+    },
+  };
+};
 export default ExpenseItemById;
