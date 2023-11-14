@@ -20,6 +20,7 @@ const Dashboard = (props) => {
   const searchVal = useStore((state) => state.searchVal);
   const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(process.env.URL);
   useEffect(() => {
     const filtered = searchFilter(searchVal, expenses);
     setSearchFilteredExpenses(filtered);
