@@ -1,23 +1,43 @@
 import Image from "next/image";
 import classes from "./PaymentCategories.module.css";
 import useStore from "../../store/useStore";
+import { useState } from "react";
+import Modal from "../UI/Modal/Modal";
+import ExpenseItem from "../ExpenseItem/ExpenseItem";
 
-const Payments = ({ expenses }) => {
+const Payments = ({ expenses, setIsModalOpen }) => {
   const expensesByCash = expenses?.filter(
     (expense) => expense.paymentMethod === "cash"
   );
+
   const isMobile = useStore((state) => state.isMobile);
   const expensesByCreditCard = expenses?.filter(
     (expense) => expense.paymentMethod === "credit-card"
   );
   const cashExpenseByPct = (expensesByCash.length / expenses.length) * 100;
   const parsedcashExpenseByPct = parseInt(cashExpenseByPct);
+
+  const clickedCreditPayment = () => {
+    setIsModalOpen({
+      modalBool: true,
+      modalContent: expensesByCreditCard,
+      modalTitle: "Credit card payments",
+    });
+  };
+  const clickedCashPayment = () => {
+    setIsModalOpen({
+      modalBool: true,
+      modalContent: expensesByCash,
+      modalTitle: "Cash payments",
+    });
+  };
+
   return (
     <div className={classes.paymentCategoriesContainer}>
       <div className={classes.paymentDetails}>
         <h3>Payment methods</h3>
         <div className={classes.paymentMethods}>
-          <div className={classes.creditCard}>
+          <div className={classes.creditCard} onClick={clickedCreditPayment}>
             <Image
               src={"/assets/icons/credit-card_v2.png"}
               alt="credit-card"
@@ -26,7 +46,7 @@ const Payments = ({ expenses }) => {
             />
             <span>{expensesByCreditCard.length}</span>
           </div>
-          <div className={classes.cash}>
+          <div className={classes.cash} onClick={clickedCashPayment}>
             <Image
               src={"/assets/icons/cash_v2.png"}
               alt="credit-card"
