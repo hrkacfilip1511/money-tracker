@@ -6,9 +6,13 @@ const CategoryExpensesItem = ({
   categoryName,
   categoryAmount,
   percentage,
+  clicked,
 }) => {
   return (
-    <div className={classes.categoryExpense}>
+    <div
+      className={classes.categoryExpense}
+      onClick={() => clicked(categoryName)}
+    >
       <div className={classes.categoryImage}>
         <Image
           src={`/assets/categories/${imageName}`}

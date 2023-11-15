@@ -31,6 +31,7 @@
   justify-content: start;
   align-items: center;
   border-radius: 20px;
+  cursor: pointer;
 }
 .creditCard span {
   width: 30px;
@@ -51,6 +52,8 @@
   justify-content: start;
   align-items: center;
   border-radius: 20px;
+  cursor: pointer;
+
 }
 .cash span {
   width: 30px;

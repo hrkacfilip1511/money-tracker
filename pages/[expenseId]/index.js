@@ -27,8 +27,6 @@ export const getServerSideProps = async (context) => {
     (expense) => expense.expenseId.toString() === query.expenseId
   );
 
-  console.log(filteredExpense);
-
   return {
     props: {
       expenseData: filteredExpense,

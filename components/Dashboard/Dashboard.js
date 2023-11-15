@@ -7,6 +7,8 @@ import Payments from "../PaymentCategories/PaymentCategories";
 import CategoriesExpenses from "../CategoriesExpenses/CategoriesExpenses";
 import useStore from "../../store/useStore";
 import searchFilter from "../../functions/searchFilter";
+import Modal from "../UI/Modal/Modal";
+import ExpenseItem from "../ExpenseItem/ExpenseItem";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const session = useStore((state) => state.session);
@@ -20,7 +22,11 @@ const Dashboard = (props) => {
   const searchVal = useStore((state) => state.searchVal);
   const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(process.env.URL);
+  const [isModalOpen, setIsModalOpen] = useState({
+    modalBool: false,
+    modalTitle: "",
+    modalContent: [],
+  });
   useEffect(() => {
     const filtered = searchFilter(searchVal, expenses);
     setSearchFilteredExpenses(filtered);
@@ -63,6 +69,39 @@ const Dashboard = (props) => {
       setExpenses(filteredExpenses);
     }
   }, [orderBy]);
+  const clickedClose = () => {
+    setIsModalOpen({ modalBool: false, modalTitle: "", modalContent: [] });
+  };
+  if (isModalOpen.modalBool) {
+    let expenseAmt = isModalOpen.modalContent.reduce(
+      (acc, currVal) => acc + currVal.amount,
+      0
+    );
+    return (
+      <Modal clicked={clickedClose}>
+        <h3 className={classes.modalTitle}>{isModalOpen.modalTitle}</h3>
+        {isModalOpen.modalContent?.map((expense) => {
+          return (
+            <ExpenseItem
+              key={expense.expenseId}
+              amount={expense.amount}
+              category={expense.category}
+              date={expense.date}
+              paymentMethod={expense.paymentMethod}
+              quantity={expense.quantity}
+              title={expense.title}
+              id={expense.expenseId}
+            />
+          );
+        })}
+        <div className={classes.totalExpense}>
+          <span className={classes.totalExpenseTitle}>Total</span>
+          <span className={classes.totalExpenseValue}>{expenseAmt} KM</span>
+        </div>
+      </Modal>
+    );
+  }
+
   return (
     <div className={classes.homepageContent}>
       <ExpensesMainInfo
@@ -92,10 +131,14 @@ const Dashboard = (props) => {
             }
           />
         </div>
-        <Payments expenses={expenses} />
+        <Payments expenses={expenses} setIsModalOpen={setIsModalOpen} />
       </div>
       {expenses?.length > 0 && (
-        <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
+        <CategoriesExpenses
+          expenses={expenses}
+          expenseAmount={expenseAmount}
+          setIsModalOpen={setIsModalOpen}
+        />
       )}
     </div>
   );

@@ -16,6 +16,27 @@
   display: flex;
   flex-direction: row;
 }
+.modalTitle{
+  text-align: center;
+  font-size: 1.2rem;
+}
+.totalExpense {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  border-top: 1px solid grey;
+  padding: 10px 0;
+}
+.totalExpenseTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+}
+.totalExpenseValue {
+  font-weight: 600;
+  color: red;
+}
 @media screen and (max-width: 520px) {
   .homepageContent {
     top: 150px;
