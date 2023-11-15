@@ -77,6 +77,7 @@ const EachExpense = ({ expenseData }) => {
       window.location.href = "/";
     }
   };
+  const formattedDate = expenseData.date.split("T")[0];
   return (
     <div className={classes.itemContainer}>
       <div className={classes.icon}>
@@ -130,7 +131,7 @@ const EachExpense = ({ expenseData }) => {
           <input
             type="date"
             id="date"
-            value={date}
+            value={date ? date : formattedDate}
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
