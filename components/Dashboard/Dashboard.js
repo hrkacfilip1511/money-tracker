@@ -73,6 +73,10 @@ const Dashboard = (props) => {
     setIsModalOpen({ modalBool: false, modalTitle: "", modalContent: [] });
   };
   if (isModalOpen.modalBool) {
+    let expenseAmt = isModalOpen.modalContent.reduce(
+      (acc, currVal) => acc + currVal.amount,
+      0
+    );
     return (
       <Modal clicked={clickedClose}>
         <h3 className={classes.modalTitle}>{isModalOpen.modalTitle}</h3>
@@ -90,6 +94,10 @@ const Dashboard = (props) => {
             />
           );
         })}
+        <div className={classes.totalExpense}>
+          <span className={classes.totalExpenseTitle}>Total</span>
+          <span className={classes.totalExpenseValue}>{expenseAmt} KM</span>
+        </div>
       </Modal>
     );
   }
@@ -126,7 +134,11 @@ const Dashboard = (props) => {
         <Payments expenses={expenses} setIsModalOpen={setIsModalOpen} />
       </div>
       {expenses?.length > 0 && (
-        <CategoriesExpenses expenses={expenses} expenseAmount={expenseAmount} />
+        <CategoriesExpenses
+          expenses={expenses}
+          expenseAmount={expenseAmount}
+          setIsModalOpen={setIsModalOpen}
+        />
       )}
     </div>
   );

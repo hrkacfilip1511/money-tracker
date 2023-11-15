@@ -1,14 +1,26 @@
 import CategoryExpensesItem from "../CategoryExpensesItem/CategoryExpensesItem";
 import classes from "./CategoriesExpenses.module.css";
 import useStore from "../../store/useStore";
-const CategoriesExpenses = ({ expenses, expenseAmount }) => {
+const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
   const categories = useStore((state) => state.categories);
   let expensesByCategories = [];
+
+  const clickedCategory = (catName) => {
+    const expensesByCategory = expenses.filter(
+      (expense) => expense.category === catName
+    );
+    setIsModalOpen({
+      modalBool: true,
+      modalTitle: `${catName} expenses`,
+      modalContent: expensesByCategory,
+    });
+  };
 
   categories.forEach((category) => {
     let filteredExpenses = expenses.filter(
       (expense) => expense.category === category.categoryName
     );
+
     if (filteredExpenses.length > 0) {
       const sumOfFilteredExpense = filteredExpenses.reduce(
         (acc, currVal) => acc + currVal.amount,
@@ -38,11 +50,12 @@ const CategoriesExpenses = ({ expenses, expenseAmount }) => {
             return (
               <>
                 <CategoryExpensesItem
-                  key={expense.id}
+                  key={expense.categoryName}
                   imageName={expense.imageName}
                   categoryName={expense.categoryName}
                   categoryAmount={expense.amount}
                   percentage={expense.expensePercentage}
+                  clicked={clickedCategory}
                 />
               </>
             );
