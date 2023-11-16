@@ -11,22 +11,24 @@ const ExpenseFilter = (props) => {
     leftArrow: false,
     rightArror: true,
   });
+  const [counter, setCounter] = useState(0);
   const router = useRouter();
   const goToNewExpense = () => {
     router.replace("/add-expense");
   };
   const nextMonthHandler = () => {
+    if (counter === 0) {
+      return;
+    }
+    if (counter === -1) {
+      setButtonDisabledOptions({ leftArrow: false, rightArror: true });
+    } else {
+      setButtonDisabledOptions({ leftArrow: false, rightArror: false });
+    }
+    setCounter((preval) => preval + 1);
     const date = new Date(props.date);
     const month = date.getMonth();
     const year = date.getFullYear();
-    if (
-      new Date(props.date).getMonth() === new Date().getMonth() &&
-      year === new Date().getFullYear()
-    ) {
-      setButtonDisabledOptions({ leftArrow: false, rightArror: true });
-      return;
-    }
-    setButtonDisabledOptions({ leftArrow: false, rightArror: false });
 
     let nextMonth, nextYear;
 
@@ -41,15 +43,18 @@ const ExpenseFilter = (props) => {
     props.setDate(nextMonthOrYear);
   };
   const previousMonthHandler = () => {
+    if (counter < -11) {
+      return;
+    }
+    if (counter === -11) {
+      setButtonDisabledOptions({ leftArrow: true });
+    } else {
+      setButtonDisabledOptions({ leftArrow: false, rightArror: false });
+    }
+    setCounter((preval) => preval - 1);
     const date = new Date(props.date);
     const month = date.getMonth();
     const year = date.getFullYear();
-
-    if (month === new Date().getMonth() && year !== new Date().getFullYear()) {
-      setButtonDisabledOptions({ leftArrow: true });
-      return;
-    }
-    setButtonDisabledOptions({ leftArrow: false, rightArror: false });
 
     let prevMonth, prevYear;
     if (month === 0) {
