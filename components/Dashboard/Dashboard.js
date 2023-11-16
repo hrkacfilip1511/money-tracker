@@ -22,6 +22,7 @@ const Dashboard = (props) => {
   const searchVal = useStore((state) => state.searchVal);
   const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [cachedExpenses, setCachedExpenses] = useState({});
   const [isModalOpen, setIsModalOpen] = useState({
     modalBool: false,
     modalTitle: "",
@@ -33,7 +34,9 @@ const Dashboard = (props) => {
   }, [searchVal]);
 
   useEffect(() => {
+    const toDateVal = new Date(date);
     setExpenses([]);
+    const cachedKey = `${toDateVal.getMonth() + 1}-${toDateVal.getFullYear()}`;
     const fetchExpenses = async () => {
       setIsLoading(true);
       const response = await fetch(
@@ -48,12 +51,18 @@ const Dashboard = (props) => {
             0
           );
           setExpenseAmount(expenseAmt?.toFixed(2));
+          setCachedExpenses({ ...cachedExpenses, [cachedKey]: data.expenses });
         }
       }
       setIsLoading(false);
     };
+
     if (session?.user?.email) {
-      fetchExpenses();
+      if (!cachedExpenses[cachedKey]) {
+        fetchExpenses();
+      } else {
+        setExpenses(cachedExpenses[cachedKey]);
+      }
     }
   }, [session?.user?.email, date]);
   useEffect(() => {

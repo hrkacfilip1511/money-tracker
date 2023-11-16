@@ -1,6 +1,7 @@
 import CategoryExpensesItem from "../CategoryExpensesItem/CategoryExpensesItem";
 import classes from "./CategoriesExpenses.module.css";
 import useStore from "../../store/useStore";
+import { Fragment } from "react";
 const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
   const categories = useStore((state) => state.categories);
   let expensesByCategories = [];
@@ -15,7 +16,6 @@ const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
       modalContent: expensesByCategory,
     });
   };
-
   categories.forEach((category) => {
     let filteredExpenses = expenses.filter(
       (expense) => expense.category === category.categoryName
@@ -29,7 +29,7 @@ const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
       expensesByCategories = [
         ...expensesByCategories,
         {
-          id: category.id,
+          id: category._id,
           categoryName: category.categoryName,
           amount: sumOfFilteredExpense,
           imageName: category.categoryImage,
@@ -48,16 +48,15 @@ const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
           .sort((a, b) => b.amount - a.amount)
           .map((expense) => {
             return (
-              <>
+              <Fragment key={expense.id}>
                 <CategoryExpensesItem
-                  key={expense.categoryName}
                   imageName={expense.imageName}
                   categoryName={expense.categoryName}
                   categoryAmount={expense.amount}
                   percentage={expense.expensePercentage}
                   clicked={clickedCategory}
                 />
-              </>
+              </Fragment>
             );
           })}
     </div>
