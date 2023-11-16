@@ -50,6 +50,7 @@
   width: 24%;
 }
 .filterByDate select {
+  -webkit-appearance: none;
   width: 85%;
   padding: 10px 0;
   border: none;
