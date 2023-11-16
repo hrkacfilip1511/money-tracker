@@ -82,6 +82,7 @@
     flex-direction: row;
 }
 .options select {
+  -webkit-appearance: none;
     cursor: pointer;
     padding: 8px 5px;
     border-radius: 5px;
