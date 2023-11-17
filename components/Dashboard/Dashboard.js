@@ -9,6 +9,7 @@ import useStore from "../../store/useStore";
 import searchFilter from "../../functions/searchFilter";
 import Modal from "../UI/Modal/Modal";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
+import DailyExpensesInfo from "../DailyExpensesInfo/DailyExpensesInfo";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const session = useStore((state) => state.session);
@@ -61,6 +62,11 @@ const Dashboard = (props) => {
       if (!cachedExpenses[cachedKey]) {
         fetchExpenses();
       } else {
+        let expenseAmt = cachedExpenses[cachedKey].reduce(
+          (acc, currVal) => acc + currVal.amount,
+          0
+        );
+        setExpenseAmount(expenseAmt?.toFixed(2));
         setExpenses(cachedExpenses[cachedKey]);
       }
     }
@@ -110,7 +116,6 @@ const Dashboard = (props) => {
       </Modal>
     );
   }
-
   return (
     <div className={classes.homepageContent}>
       <ExpensesMainInfo
@@ -118,6 +123,10 @@ const Dashboard = (props) => {
         userBudget={parsedBudget}
         userBalance={userBalance}
       />
+      {parseFloat(expenseAmount) > 0 && (
+        <DailyExpensesInfo date={date} totalExpenses={expenseAmount} />
+      )}
+
       <div className={classes.expensesMoreDetails}>
         <div>
           <ExpenseFilter
