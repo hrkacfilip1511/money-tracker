@@ -1,9 +1,6 @@
 import Image from "next/image";
 import classes from "./PaymentCategories.module.css";
 import useStore from "../../store/useStore";
-import { useState } from "react";
-import Modal from "../UI/Modal/Modal";
-import ExpenseItem from "../ExpenseItem/ExpenseItem";
 
 const Payments = ({ expenses, setIsModalOpen }) => {
   const expensesByCash = expenses?.filter(

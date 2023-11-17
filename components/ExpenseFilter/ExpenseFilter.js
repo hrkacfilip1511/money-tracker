@@ -3,8 +3,8 @@ import classes from "./ExpenseFilter.module.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useState } from "react";
 const ExpenseFilter = (props) => {
-  const formattedDate = new Date(props.date).toLocaleString("hr-HR", {
-    month: "long",
+  const formattedDate = new Date(props.date).toLocaleString("en-GB", {
+    month: "short",
     year: "numeric",
   });
   const [buttonDisabledOptions, setButtonDisabledOptions] = useState({
