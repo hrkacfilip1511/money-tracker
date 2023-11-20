@@ -20,19 +20,22 @@ const Auth = (props) => {
   const passwordRef = useRef();
   const nameRef = useRef();
   const budgetRef = useRef();
+  const confPasswordRef = useRef();
   const submitFormHandler = async (e) => {
     e.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
     const enteredName = !isLogin ? nameRef?.current?.value : "";
     const enteredBudget = !isLogin ? budgetRef.current.value : 0;
-
+    const enteredConfirmPasswword = !isLogin
+      ? confPasswordRef.current.value
+      : "";
     if (isLogin) {
       setIsLoading(true);
 
       const result = await signIn("credentials", {
         redirect: false,
-        email: enteredEmail,
+        email: enteredEmail.toLowerCase(),
         password: enteredPassword,
       });
       setIsLoading(false);
@@ -46,10 +49,11 @@ const Auth = (props) => {
       }
     } else {
       const usersData = {
-        email: enteredEmail,
+        email: enteredEmail.toLowerCase(),
         password: enteredPassword,
         name: enteredName,
         budget: enteredBudget,
+        confirmPassword: enteredConfirmPasswword,
       };
       if (isCheckedTerms) {
         setErrorCheckBoxClass(false);
@@ -79,6 +83,10 @@ const Auth = (props) => {
         </div>
         {!isLogin && (
           <>
+            <div className={classes.password}>
+              <label htmlFor="confPassword">Confirm password</label>
+              <input id="confPassword" type="password" ref={confPasswordRef} />
+            </div>
             <div className={classes.budget}>
               <label htmlFor="budget">Add your budget</label>
               <input type="text" ref={budgetRef} id="budget" />
