@@ -7,6 +7,7 @@ const handler = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const budget = req.body.budget;
+    const confirmPassword = req.body.confirmPassword;
     const parsedBudget = parseFloat(budget);
     const client = await connectToDatabase();
 
@@ -22,7 +23,7 @@ const handler = async (req, res) => {
       !email.includes("@") ||
       email.length === 0 ||
       !password ||
-      password.length < 5 ||
+      !confirmPassword ||
       isNaN(parsedBudget)
     ) {
       res
@@ -32,8 +33,20 @@ const handler = async (req, res) => {
       return;
     }
 
+    if (password.length < 6) {
+      res.status(403).json({ message: "Minimial 6 characters for password" });
+      client.close();
+      return;
+    }
+
     if (existingUser) {
       res.status(409).json({ message: "User already exists" });
+      client.close();
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      res.status(403).json({ message: "Passwords do not match." });
       client.close();
       return;
     }
