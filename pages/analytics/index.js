@@ -1,14 +1,13 @@
 import { Fragment } from "react";
-import ComingSoon from "../../components/UI/ComingSoon/ComingSoon";
 import Head from "next/head";
-
+import AnalyticsExpenses from "../../components/Analytics/Analytics";
 const Analytics = () => {
   return (
     <Fragment>
       <Head>
         <title>Analytics</title>
       </Head>
-      <ComingSoon />{" "}
+      <AnalyticsExpenses />
     </Fragment>
   );
 };
