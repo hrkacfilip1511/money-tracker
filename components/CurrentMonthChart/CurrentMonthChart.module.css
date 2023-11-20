@@ -1,0 +1,13 @@
+.currentMonthChart {
+    width: 500px;
+    margin: 50px 0 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+@media  screen and (max-width: 550px) {
+    .currentMonthChart {
+        width: 100%;
+        background-color: antiquewhite;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,22 @@
+.charts {
+    position: relative;
+    top: -150px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+.thisMonthCharts{
+    margin-top: 100px;
+}
+@media screen and (max-width: 550px) {
+    .charts {
+        width: 100%;
+        top: 150px;
+        left: 0;
+        transform: translateX(0);
+        padding: 0 5px;
+    }
+}

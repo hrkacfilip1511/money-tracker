@@ -10,6 +10,7 @@ import searchFilter from "../../functions/searchFilter";
 import Modal from "../UI/Modal/Modal";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
 import DailyExpensesInfo from "../DailyExpensesInfo/DailyExpensesInfo";
+import CurrentMonthChart from "../CurrentMonthChart/CurrentMonthChart";
 const Dashboard = (props) => {
   const [expenses, setExpenses] = useState([]);
   const session = useStore((state) => state.session);
@@ -149,6 +150,9 @@ const Dashboard = (props) => {
         </div>
         <Payments expenses={expenses} setIsModalOpen={setIsModalOpen} />
       </div>
+      {expenses.length > 0 && (
+        <CurrentMonthChart expenses={expenses} date={date} />
+      )}
       {expenses?.length > 0 && (
         <CategoriesExpenses
           expenses={expenses}
