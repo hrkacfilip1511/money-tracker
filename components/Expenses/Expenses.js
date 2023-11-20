@@ -7,7 +7,7 @@ const Expenses = (props) => {
     <div className={classes.expenses}>
       {props.isLoading ? (
         <div className={classes.boxContainer}>
-          <LoadingSpinner height={60} width={60} />
+          <LoadingSpinner height={60} width={60} lineWidth={6} />
         </div>
       ) : props.expenses.length === 0 ? (
         <EmptyData message={"No expenses found"} imageName={"empty-expenses"} />

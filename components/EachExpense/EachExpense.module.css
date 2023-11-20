@@ -214,6 +214,11 @@
     display: flex;
     justify-content: center;
   }
+  .errorMsg{
+    color: rgb(196, 2, 2);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
   @media screen and (max-width: 520px){
     .itemContainer {
       left: 0;

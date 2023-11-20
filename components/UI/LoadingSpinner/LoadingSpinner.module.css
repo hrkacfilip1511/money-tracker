@@ -2,8 +2,8 @@
 .loaderItem{
     
     border-radius: 50%;
-    border: 6px solid rgb(200, 204, 204);
-    border-top: 6px solid rgb(64, 64, 250);
+    /* border: 3px solid rgb(200, 204, 204);
+    border-top: 3px solid rgb(64, 64, 250); */
     animation: loading-spinner 1.6s infinite;
 }
 

@@ -123,9 +123,7 @@ const Dashboard = (props) => {
         userBudget={parsedBudget}
         userBalance={userBalance}
       />
-      {parseFloat(expenseAmount) > 0 && (
-        <DailyExpensesInfo date={date} totalExpenses={expenseAmount} />
-      )}
+      <DailyExpensesInfo date={date} totalExpenses={expenseAmount} />
 
       <div className={classes.expensesMoreDetails}>
         <div>

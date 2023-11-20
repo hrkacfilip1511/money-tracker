@@ -121,7 +121,7 @@ const Auth = (props) => {
           </button>
           {isLoading || props.isLoading ? (
             <div style={{ marginTop: "10px" }}>
-              <LoadingSpinner width={40} height={40} />{" "}
+              <LoadingSpinner width={40} height={40} lineWidth={4} />{" "}
             </div>
           ) : null}
         </div>

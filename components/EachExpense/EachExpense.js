@@ -19,6 +19,7 @@ const EachExpense = ({ expenseData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState();
   const [details, setDetails] = useState(expenseData?.details);
+  const [error, setError] = useState("");
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
@@ -40,6 +41,7 @@ const EachExpense = ({ expenseData }) => {
     )?.categoryImage;
   }
   const editHandler = async () => {
+    setError("");
     setIsLoading(true);
     const data = {
       email: session?.user?.email,
@@ -62,6 +64,9 @@ const EachExpense = ({ expenseData }) => {
     setIsLoading(false);
     if (response.status === 201) {
       window.location.href = "/";
+    } else {
+      const data = await response.json();
+      setError(data.message);
     }
   };
   const deleteExpense = async () => {
@@ -175,6 +180,15 @@ const EachExpense = ({ expenseData }) => {
           onChange={(e) => setDetails(e.target.value)}
         />
       </div>
+      {isLoading || error.length > 0 ? (
+        <div className={classes.spinner}>
+          {isLoading ? (
+            <LoadingSpinner width={30} height={30} lineWidth={3} />
+          ) : (
+            <span className={classes.errorMsg}>{error}</span>
+          )}
+        </div>
+      ) : null}
       <div className={classes.actions}>
         <button className={classes.editBtn} onClick={editHandler}>
           Save changes
@@ -183,11 +197,6 @@ const EachExpense = ({ expenseData }) => {
           Delete
         </button>
       </div>
-      {isLoading && (
-        <div className={classes.spinner}>
-          <LoadingSpinner width={30} height={30} />
-        </div>
-      )}
     </div>
   );
 };
