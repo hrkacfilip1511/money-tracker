@@ -101,9 +101,10 @@
     font-size: 0.8rem;
   }
   .findedExpensesValue {
-    width: 18px;
+    min-width: 18px;
     font-size: 0.9rem;
-    height: 18px;
+    min-height: 18px;
+    padding: 12px;
   }
   .dateVal {
     font-size: 0.9rem;
