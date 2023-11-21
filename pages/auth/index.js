@@ -4,6 +4,7 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 
 const Authentication = (props) => {
+  console.log("auth props", props);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const signupHandler = async (userData) => {
@@ -40,6 +41,8 @@ const Authentication = (props) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+  console.log("getserver auth", session);
+
   if (session) {
     return {
       redirect: {
