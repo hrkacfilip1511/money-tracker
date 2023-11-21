@@ -1,13 +1,11 @@
 import Auth from "../../components/Auth/Auth";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/router";
 const version = require("../../package.json").version;
 
 const Authentication = (props) => {
   console.log("auth props", props);
-  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -47,11 +45,11 @@ const Authentication = (props) => {
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  console.log("getserver auth", session);
+  console.log("getserver auth =>>>>>", session);
   if (!session) {
     return {
       props: {
-        message: "No session",
+        session,
       },
     };
   }
