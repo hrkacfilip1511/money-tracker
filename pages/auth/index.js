@@ -8,12 +8,6 @@ const version = require("../../package.json").version;
 const Authentication = (props) => {
   console.log("auth props", props);
   const router = useRouter();
-  useEffect(() => {
-    console.log("auth props UE", props);
-    if (props.session && props.session.user) {
-      router.replace("/");
-    }
-  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -52,11 +46,19 @@ const Authentication = (props) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  console.log("getserver auth", session);
 
+  console.log("getserver auth", session);
+  if (!session) {
+    return {
+      props: {
+        message: "No session",
+      },
+    };
+  }
   return {
-    props: {
-      session: session,
+    redirect: {
+      destination: "/",
+      permanent: false,
     },
   };
 };
