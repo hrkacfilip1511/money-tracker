@@ -2,6 +2,7 @@ import { Fragment, useEffect } from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import useStore from "../store/useStore";
 import Head from "next/head";
+import { getSession } from "next-auth/react";
 
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
@@ -20,7 +21,24 @@ export default function Home(props) {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Dashboard />
+      <Dashboard session={props.session} />
     </Fragment>
   );
 }
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        session,
+      },
+    };
+  }
+};
