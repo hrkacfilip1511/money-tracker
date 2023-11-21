@@ -3,7 +3,6 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import useStore from "../store/useStore";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
-
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
   console.log("rendered home", props);
@@ -27,11 +26,21 @@ export default function Home(props) {
   );
 }
 export const getServerSideProps = async (context) => {
+  console.log(res);
   const session = await getSession(context);
   console.log("getserver home", session);
-  return {
-    props: {
-      session,
-    },
-  };
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        session: session,
+      },
+    };
+  }
 };
