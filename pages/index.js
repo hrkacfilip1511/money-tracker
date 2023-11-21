@@ -6,7 +6,7 @@ import { getSession } from "next-auth/react";
 
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
-  console.log("rendered", props);
+  console.log("rendered home", props);
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
@@ -28,6 +28,7 @@ export default function Home(props) {
 }
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+  console.log("getserver home", session);
   if (!session) {
     return {
       redirect: {
