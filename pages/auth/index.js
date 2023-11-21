@@ -1,12 +1,14 @@
 import Auth from "../../components/Auth/Auth";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
 
 const Authentication = (props) => {
   console.log("auth props", props);
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
   const signupHandler = async (userData) => {
     setIsLoading(true);
     const response = await fetch("/api/auth/signup", {
@@ -39,22 +41,22 @@ const Authentication = (props) => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
-  console.log("getserver auth", session);
+// export const getServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   console.log("getserver auth", session);
 
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      message: "No session provided",
-    },
-  };
-};
+//   if (session) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {
+//       session: false,
+//     },
+//   };
+// };
 export default Authentication;
