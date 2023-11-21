@@ -36,7 +36,7 @@ const Dashboard = (props) => {
     setSearchFilteredExpenses(filtered);
   }, [searchVal]);
   useEffect(() => {
-    setSession(props.sessin);
+    setSession(props.session);
   }, []);
   useEffect(() => {
     const toDateVal = new Date(date);
