@@ -26,7 +26,6 @@ export default function Home(props) {
   );
 }
 export const getServerSideProps = async (context) => {
-  console.log(res);
   const session = await getSession(context);
   console.log("getserver home", session);
   if (!session) {
