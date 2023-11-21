@@ -1,5 +1,5 @@
 .dailyContainer {
-    min-width: 200px;
+    width: 500px;
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -5,7 +5,7 @@ import EachExpense from "../../components/EachExpense/EachExpense";
 import Head from "next/head";
 import { fetchExpensesByEmail } from "../../lib/expense-data";
 import { getSession } from "next-auth/react";
-const ExpenseItemById = ({ expenseData }) => {
+const ExpenseItemById = ({ expenseData, session }) => {
   const route = useRouter();
 
   return (
@@ -13,13 +13,21 @@ const ExpenseItemById = ({ expenseData }) => {
       <Head>
         <title>Expense - {route.query.expenseId}</title>
       </Head>
-      <EachExpense expenseData={expenseData} />
+      <EachExpense expenseData={expenseData} session={session} />
     </Fragment>
   );
 };
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  }
   const query = context.query;
   const expensesByEmail = await fetchExpensesByEmail(session?.user?.email);
 
@@ -29,6 +37,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
+      session: session,
       expenseData: filteredExpense,
     },
   };

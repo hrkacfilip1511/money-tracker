@@ -132,6 +132,7 @@ const MainNavigation = (props) => {
               <span>Logout</span>
             </div>
           )}
+          <span className={classes.version}>v{props.version}</span>
         </div>
         <div
           className={`${classes.menuOption} ${

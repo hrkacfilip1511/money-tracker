@@ -4,10 +4,11 @@ import { fetchExpensesByEmail } from "../../lib/expense-data";
 import classes from "./Analytics.module.css";
 import { backgroundColorArray, borderColorArray } from "../../lib/chart-bgs";
 import BarChart from "../BarChart/BarChart";
-const AnalyticsExpenses = () => {
-  const session = useStore((state) => state.session);
+const AnalyticsExpenses = ({ session }) => {
+  const setSession = useStore((state) => state.setSession);
   const [allExpenses, setAllExpenses] = useState([]);
   useEffect(() => {
+    setSession(session);
     const fetchExpenses = async () => {
       const data = await fetchExpensesByEmail(session.user.email);
       setAllExpenses(data);
@@ -15,7 +16,7 @@ const AnalyticsExpenses = () => {
     if (session?.user) {
       fetchExpenses();
     }
-  }, [session?.user.email]);
+  }, []);
 
   // Podaci za grafikon po mjesecu
 

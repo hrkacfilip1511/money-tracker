@@ -134,6 +134,12 @@
 .active .menuBar:nth-child(3) {
   transform: translateY(-5px) rotate(-45deg);
 }
+.version{
+  text-align: center;
+  font-size: 0.4rem;
+  color: wheat;
+  padding: 5px 0;
+}
 
 @media screen and (max-width: 550px){
   .barNavigation {

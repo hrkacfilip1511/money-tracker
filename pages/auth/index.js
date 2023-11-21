@@ -1,10 +1,9 @@
-import { useRouter } from "next/router";
 import Auth from "../../components/Auth/Auth";
 import { Fragment, useState } from "react";
 import Head from "next/head";
+import { getSession } from "next-auth/react";
 
 const Authentication = (props) => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const signupHandler = async (userData) => {
@@ -39,4 +38,21 @@ const Authentication = (props) => {
   );
 };
 
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      props: {
+        message: "No session provided",
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+};
 export default Authentication;
