@@ -6,6 +6,7 @@ import { getSession } from "next-auth/react";
 
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
+  console.log("rendered", props);
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
