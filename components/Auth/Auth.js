@@ -45,7 +45,7 @@ const Auth = (props) => {
         setError(result.error);
       }
       if (result.status === 200) {
-        router.replace("/");
+        window.location.href = "/";
         setError("");
       }
     } else {

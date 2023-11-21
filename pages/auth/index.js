@@ -40,13 +40,7 @@ const Authentication = (props) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  if (!session) {
-    return {
-      props: {
-        message: "No session provided",
-      },
-    };
-  } else {
+  if (session) {
     return {
       redirect: {
         destination: "/",
@@ -54,5 +48,10 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+  return {
+    props: {
+      message: "No session provided",
+    },
+  };
 };
 export default Authentication;
