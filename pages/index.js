@@ -4,10 +4,19 @@ import useStore from "../store/useStore";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
 export default function Home(props) {
+  useEffect(() => {
+    const fetchSession = async () => {
+      const response = await getSession();
+      console.log(response);
+    };
+    fetchSession();
+  }, []);
   const setCategories = useStore((state) => state.setCategories);
   console.log("rendered home", props);
   useEffect(() => {
+    console.log("Uslo");
     const fetchCategories = async () => {
+      console.log("Called");
       const response = await fetch("/api/categories");
       const data = await response.json();
       if (data?.length > 0) {
@@ -25,26 +34,22 @@ export default function Home(props) {
     </Fragment>
   );
 }
-export const getServerSideProps = async (context) => {
-  let session;
-  if (process.env.NODE_ENV === "development") {
-    session = await getSession(context);
-  } else {
-    session = await getSession(context.req);
-  }
-  console.log("getserver home", session);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        session: session,
-      },
-    };
-  }
-};
+// export const getServerSideProps = async (context) => {
+//   console.log(res);
+//   const session = await getSession(context);
+//   console.log("getserver home", session);
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {
+//         session: session,
+//       },
+//     };
+//   }
+// };
