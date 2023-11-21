@@ -45,7 +45,12 @@ const Authentication = (props) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
+  let session;
+  if (process.env.NODE_ENV === "development") {
+    session = await getSession(context);
+  } else {
+    session = await getSession(context.req);
+  }
 
   console.log("getserver auth", session);
   if (!session) {
