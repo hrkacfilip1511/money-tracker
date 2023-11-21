@@ -39,7 +39,7 @@ const Authentication = (props) => {
   return (
     <Fragment>
       <Head>
-        <title>Auth - {version}</title>
+        <title>{version}</title>
       </Head>
       <Auth
         onSignUp={signupHandler}
