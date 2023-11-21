@@ -5,7 +5,7 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 export default function Home(props) {
   const setCategories = useStore((state) => state.setCategories);
-  // console.log("rendered home", props);
+  console.log("rendered home", props);
   useEffect(() => {
     // console.log("Uslo");
     const fetchCategories = async () => {
@@ -28,7 +28,7 @@ export default function Home(props) {
   );
 }
 export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
+  const session = await getSession(context.req);
   console.log("getserver home", session);
   // if (!session) {
   //   return {
