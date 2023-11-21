@@ -2,9 +2,18 @@ import Auth from "../../components/Auth/Auth";
 import { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
+const version = require("../../package.json").version;
 
 const Authentication = (props) => {
   console.log("auth props", props);
+  const router = useRouter();
+  useEffect(() => {
+    console.log("auth props UE", props);
+    if (props.session && props.session.user) {
+      router.replace("/");
+    }
+  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -30,7 +39,7 @@ const Authentication = (props) => {
   return (
     <Fragment>
       <Head>
-        <title>Auth</title>
+        <title>Auth - {version}</title>
       </Head>
       <Auth
         onSignUp={signupHandler}
@@ -41,22 +50,14 @@ const Authentication = (props) => {
   );
 };
 
-// export const getServerSideProps = async (context) => {
-//   const session = await getSession(context);
-//   console.log("getserver auth", session);
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  console.log("getserver auth", session);
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: {
-//       session: false,
-//     },
-//   };
-// };
+  return {
+    props: {
+      session: session,
+    },
+  };
+};
 export default Authentication;

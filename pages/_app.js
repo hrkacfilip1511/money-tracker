@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Layout from "../components/UI/Layout/Layout";
 import "../styles/globals.css";
-import { SessionProvider, getSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   return (
