@@ -42,22 +42,22 @@ const Authentication = (props) => {
   );
 };
 
-export const getServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
+// export const getServerSideProps = async ({ req }) => {
+//   const session = await getSession({ req });
 
-  console.log("getserver auth =>>>>>", session);
-  if (!session) {
-    return {
-      props: {
-        session,
-      },
-    };
-  }
-  return {
-    redirect: {
-      destination: "/",
-      permanent: false,
-    },
-  };
-};
+//   console.log("getserver auth =>>>>>", session);
+//   if (!session) {
+//     return {
+//       props: {
+//         session,
+//       },
+//     };
+//   }
+//   return {
+//     redirect: {
+//       destination: "/",
+//       permanent: false,
+//     },
+//   };
+// };
 export default Authentication;

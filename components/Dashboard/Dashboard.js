@@ -12,9 +12,11 @@ import ExpenseItem from "../ExpenseItem/ExpenseItem";
 import DailyExpensesInfo from "../DailyExpensesInfo/DailyExpensesInfo";
 import CurrentMonthChart from "../CurrentMonthChart/CurrentMonthChart";
 const Dashboard = (props) => {
+  console.log(props);
   const [expenses, setExpenses] = useState([]);
-  const email = props.session?.user?.email;
-  const userBudget = props.session?.user?.image;
+  const session = useStore((state) => state.session);
+  const email = session?.user?.email;
+  const userBudget = session?.user?.image;
   const parsedBudget = parseFloat(userBudget)?.toFixed(2);
   const [date, setDate] = useState(new Date());
   const [expenseAmount, setExpenseAmount] = useState(0);
@@ -24,20 +26,17 @@ const Dashboard = (props) => {
   const [searchFilteredExpenses, setSearchFilteredExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cachedExpenses, setCachedExpenses] = useState({});
-  const setSession = useStore((state) => state?.setSession);
-
   const [isModalOpen, setIsModalOpen] = useState({
     modalBool: false,
     modalTitle: "",
     modalContent: [],
   });
+  console.log(session);
   useEffect(() => {
     const filtered = searchFilter(searchVal, expenses);
     setSearchFilteredExpenses(filtered);
   }, [searchVal]);
-  useEffect(() => {
-    setSession(props.session);
-  }, []);
+
   useEffect(() => {
     const toDateVal = new Date(date);
     setExpenses([]);
@@ -62,7 +61,7 @@ const Dashboard = (props) => {
       setIsLoading(false);
     };
 
-    if (props.session?.user?.email) {
+    if (session?.user?.email) {
       if (!cachedExpenses[cachedKey]) {
         fetchExpenses();
       } else {
@@ -74,7 +73,7 @@ const Dashboard = (props) => {
         setExpenses(cachedExpenses[cachedKey]);
       }
     }
-  }, [date]);
+  }, [session?.user?.email, date]);
   useEffect(() => {
     let filteredExpenses = expenses.slice();
     if (orderBy === "Date") {
