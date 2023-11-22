@@ -9,25 +9,25 @@ const Budget = (props) => {
       <Head>
         <title>Budget</title>
       </Head>
-      <ChangeBudgetForm session={props.session} />
+      <ChangeBudgetForm />
     </Fragment>
   );
 };
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        session,
-      },
-    };
-  }
-};
+// export const getServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {
+//         session,
+//       },
+//     };
+//   }
+// };
 export default Budget;
