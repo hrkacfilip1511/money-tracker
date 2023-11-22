@@ -4,12 +4,12 @@ import Image from "next/image";
 import useStore from "../../store/useStore";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
-const EachExpense = ({ expenseData, session }) => {
+const EachExpense = ({ expenseData }) => {
   const [categories, setCategories] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState(
     expenseData?.paymentMethod
   );
-  const setSession = useStore((state) => state.setSession);
+  const session = useStore((state) => state.session);
   const [title, setTitle] = useState(expenseData?.title);
   const [amountVal, setAmountVal] = useState(expenseData?.amount);
   const [quantityVal, setQuantityVal] = useState(expenseData?.quantity);
@@ -21,7 +21,6 @@ const EachExpense = ({ expenseData, session }) => {
   const [details, setDetails] = useState(expenseData?.details);
   const [error, setError] = useState("");
   useEffect(() => {
-    setSession(session);
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
       const data = await response.json();
