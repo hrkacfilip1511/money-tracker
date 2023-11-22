@@ -5,7 +5,6 @@ import Head from "next/head";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
 export default function Home(props) {
-  console.log(props);
   const setCategories = useStore((state) => state.setCategories);
   const setSession = useStore((state) => state.setSession);
   useEffect(() => {

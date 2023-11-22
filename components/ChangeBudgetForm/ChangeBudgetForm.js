@@ -3,12 +3,16 @@ import useStore from "../../store/useStore";
 import classes from "./ChangeBudgetForm.module.css";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { signOut } from "next-auth/react";
-const ChangeBudgetForm = () => {
-  const session = useStore((state) => state.session);
+const ChangeBudgetForm = ({ session }) => {
+  const setSession = useStore((state) => state.setSession);
   const budgetRef = useRef("");
   const [isLoading, setIsLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    setSession(session);
+  }, []);
 
   const onChangeBudget = async (e) => {
     e.preventDefault();
