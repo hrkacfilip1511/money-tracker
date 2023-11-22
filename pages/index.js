@@ -2,10 +2,11 @@ import { Fragment, useEffect } from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import useStore from "../store/useStore";
 import Head from "next/head";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 export default function Home(props) {
+  console.log(props);
   const setCategories = useStore((state) => state.setCategories);
-  console.log("rendered home", props);
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
@@ -25,21 +26,24 @@ export default function Home(props) {
     </Fragment>
   );
 }
-// export const getServerSideProps = async ({ req }) => {
-//   const session = await getSession({ req });
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/auth",
-//         permanent: false,
-//       },
-//     };
-//   } else {
-//     return {
-//       props: {
-//         session: session,
-//       },
-//     };
-//   }
-// };
+export const getServerSideProps = async ({ req, res }) => {
+  return {
+    props: {
+      tokencic: await getServerSession(req, res, authOptions),
+    },
+  };
+  //   if (!session) {
+  //     return {
+  //       redirect: {
+  //         destination: "/auth",
+  //         permanent: false,
+  //       },
+  //     };
+  //   } else {
+  //     return {
+  //       props: {
+  //         session: session,
+  //       },
+  //     };
+  //   }
+};

@@ -5,8 +5,6 @@ import { getSession } from "next-auth/react";
 const version = require("../../package.json").version;
 
 const Authentication = (props) => {
-  console.log("auth props", props);
-
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
