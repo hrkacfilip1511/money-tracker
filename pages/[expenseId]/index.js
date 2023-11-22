@@ -7,7 +7,7 @@ import { fetchExpensesByEmail } from "../../lib/expense-data";
 import { getSession } from "next-auth/react";
 const ExpenseItemById = ({ expenseData, session }) => {
   const route = useRouter();
-
+  console.log(expenseData, session);
   return (
     <Fragment>
       <Head>
@@ -20,14 +20,14 @@ const ExpenseItemById = ({ expenseData, session }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
   const query = context.query;
   const expensesByEmail = await fetchExpensesByEmail(session?.user?.email);
 
