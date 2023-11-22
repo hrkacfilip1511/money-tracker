@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
-import useStore from "../../store/useStore";
 import { Fragment } from "react";
 import EachExpense from "../../components/EachExpense/EachExpense";
 import Head from "next/head";
 import { fetchExpensesByEmail } from "../../lib/expense-data";
-import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 const ExpenseItemById = ({ expenseData, session }) => {
@@ -19,7 +17,7 @@ const ExpenseItemById = ({ expenseData, session }) => {
   );
 };
 
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ req, res, query }) => {
   const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
@@ -30,11 +28,11 @@ export const getServerSideProps = async ({ req, res }) => {
       },
     };
   }
-  const query = context.query;
+  const queryId = query;
   const expensesByEmail = await fetchExpensesByEmail(session?.user?.email);
 
   const filteredExpense = expensesByEmail.find(
-    (expense) => expense.expenseId.toString() === query.expenseId
+    (expense) => expense.expenseId.toString() === queryId.expenseId
   );
 
   return {
