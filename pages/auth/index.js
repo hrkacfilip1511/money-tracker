@@ -1,7 +1,6 @@
 import Auth from "../../components/Auth/Auth";
 import { Fragment, useState } from "react";
 import Head from "next/head";
-import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 const version = require("../../package.json").version;
@@ -31,7 +30,7 @@ const Authentication = (props) => {
   return (
     <Fragment>
       <Head>
-        <title>{version}</title>
+        <title>Auth</title>
       </Head>
       <Auth
         onSignUp={signupHandler}
