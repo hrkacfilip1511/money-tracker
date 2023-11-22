@@ -2,6 +2,8 @@ import Auth from "../../components/Auth/Auth";
 import { Fragment, useState } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 const version = require("../../package.json").version;
 
 const Authentication = (props) => {
@@ -58,4 +60,22 @@ const Authentication = (props) => {
 //     },
 //   };
 // };
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        session: session,
+      },
+    };
+  }
+};
 export default Authentication;

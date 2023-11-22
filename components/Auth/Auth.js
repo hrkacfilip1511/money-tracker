@@ -38,7 +38,6 @@ const Auth = (props) => {
         email: enteredEmail.toLowerCase(),
         password: enteredPassword,
       });
-      console.log(result);
       setIsLoading(false);
 
       if (result.status === 401) {

@@ -7,7 +7,9 @@ import { authOptions } from "../pages/api/auth/[...nextauth]";
 export default function Home(props) {
   console.log(props);
   const setCategories = useStore((state) => state.setCategories);
+  const setSession = useStore((state) => state.setSession);
   useEffect(() => {
+    setSession(props.session);
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
       const data = await response.json();
@@ -27,23 +29,20 @@ export default function Home(props) {
   );
 }
 export const getServerSideProps = async ({ req, res }) => {
-  return {
-    props: {
-      tokencic: await getServerSession(req, res, authOptions),
-    },
-  };
-  //   if (!session) {
-  //     return {
-  //       redirect: {
-  //         destination: "/auth",
-  //         permanent: false,
-  //       },
-  //     };
-  //   } else {
-  //     return {
-  //       props: {
-  //         session: session,
-  //       },
-  //     };
-  //   }
+  const session = await getServerSession(req, res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        session: session,
+      },
+    };
+  }
 };
