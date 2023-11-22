@@ -7,14 +7,13 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useStore from "../../store/useStore";
-const ExpenseForm = ({ session }) => {
+const ExpenseForm = () => {
   const [categories, setCategories] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [category, setCategory] = useState("");
   const router = useRouter();
-  const setSession = useStore((state) => state.setSession);
+  const session = useStore((state) => state.session);
   useEffect(() => {
-    setSession(session);
     const fetchCategories = async () => {
       const response = await fetch("/api/categories");
       const data = await response.json();

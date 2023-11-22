@@ -8,25 +8,25 @@ const Analytics = (props) => {
       <Head>
         <title>Analytics</title>
       </Head>
-      <AnalyticsExpenses session={props.session} />
+      <AnalyticsExpenses />
     </Fragment>
   );
 };
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        session,
-      },
-    };
-  }
-};
+// export const getServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {
+//         session,
+//       },
+//     };
+//   }
+// };
 export default Analytics;
