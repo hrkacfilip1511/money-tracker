@@ -96,20 +96,22 @@ const Dashboard = (props) => {
     return (
       <Modal clicked={clickedClose}>
         <h3 className={classes.modalTitle}>{isModalOpen.modalTitle}</h3>
-        {isModalOpen.modalContent?.map((expense) => {
-          return (
-            <ExpenseItem
-              key={expense.expenseId}
-              amount={expense.amount}
-              category={expense.category}
-              date={expense.date}
-              paymentMethod={expense.paymentMethod}
-              quantity={expense.quantity}
-              title={expense.title}
-              id={expense.expenseId}
-            />
-          );
-        })}
+        {isModalOpen.modalContent
+          ?.sort((a, b) => b.amount - a.amount)
+          .map((expense) => {
+            return (
+              <ExpenseItem
+                key={expense.expenseId}
+                amount={expense.amount}
+                category={expense.category}
+                date={expense.date}
+                paymentMethod={expense.paymentMethod}
+                quantity={expense.quantity}
+                title={expense.title}
+                id={expense.expenseId}
+              />
+            );
+          })}
         <div className={classes.totalExpense}>
           <span className={classes.totalExpenseTitle}>Total</span>
           <span className={classes.totalExpenseValue}>{expenseAmt} KM</span>
