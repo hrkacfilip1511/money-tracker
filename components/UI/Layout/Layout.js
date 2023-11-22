@@ -3,7 +3,6 @@ import useStore from "../../../store/useStore";
 const Layout = (props) => {
   const version = require("../../../package.json").version;
   const session = useStore((state) => state.session);
-  console.log(session);
 
   return (
     <div>
