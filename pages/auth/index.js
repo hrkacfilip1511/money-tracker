@@ -42,8 +42,8 @@ const Authentication = (props) => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
 
   console.log("getserver auth =>>>>>", session);
   if (!session) {
