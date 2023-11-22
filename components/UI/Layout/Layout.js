@@ -16,9 +16,9 @@ const Layout = (props) => {
       setSession(session);
     }
 
-    if (session === null) {
-      router.push("/auth");
-    }
+    // if (session === null) {
+    //   router.push("/auth");
+    // }
   }, [session, router.route]);
 
   // useEffect(() => {
