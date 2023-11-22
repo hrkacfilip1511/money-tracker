@@ -12,7 +12,6 @@ import ExpenseItem from "../ExpenseItem/ExpenseItem";
 import DailyExpensesInfo from "../DailyExpensesInfo/DailyExpensesInfo";
 import CurrentMonthChart from "../CurrentMonthChart/CurrentMonthChart";
 const Dashboard = (props) => {
-  console.log(props);
   const [expenses, setExpenses] = useState([]);
   const session = useStore((state) => state.session);
   const email = session?.user?.email;
@@ -31,7 +30,6 @@ const Dashboard = (props) => {
     modalTitle: "",
     modalContent: [],
   });
-  console.log(session);
   useEffect(() => {
     const filtered = searchFilter(searchVal, expenses);
     setSearchFilteredExpenses(filtered);
