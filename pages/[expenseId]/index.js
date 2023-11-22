@@ -7,7 +7,6 @@ import { fetchExpensesByEmail } from "../../lib/expense-data";
 import { getSession } from "next-auth/react";
 const ExpenseItemById = ({ expenseData, session }) => {
   const route = useRouter();
-  console.log(expenseData, session);
   return (
     <Fragment>
       <Head>

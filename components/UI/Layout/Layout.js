@@ -11,12 +11,12 @@ const Layout = (props) => {
   const version = require("../../../package.json").version;
   // const [isScrolledToTheBottom, setIsScrolledToTheBottom] = useState(false);
   useEffect(() => {
-    console.log("render");
+    console.log(session);
     if (session) {
       setSession(session);
     }
 
-    // if (session === null) {
+    // if (session === null || !session) {
     //   router.push("/auth");
     // }
   }, [session, router.route]);
