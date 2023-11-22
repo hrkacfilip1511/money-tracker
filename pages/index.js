@@ -21,25 +21,25 @@ export default function Home(props) {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Dashboard session={props.session} />
+      <Dashboard />
     </Fragment>
   );
 }
-export const getServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
+// export const getServerSideProps = async ({ req }) => {
+//   const session = await getSession({ req });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        session: session,
-      },
-    };
-  }
-};
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {
+//         session: session,
+//       },
+//     };
+//   }
+// };
