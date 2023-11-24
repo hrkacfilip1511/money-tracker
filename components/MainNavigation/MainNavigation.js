@@ -23,9 +23,9 @@ const MainNavigation = (props) => {
   const searchValue = useStore((state) => state.searchVal);
   const setIsMobile = useStore((state) => state.setIsMobile);
   const isMobile = useStore((state) => state.isMobile);
-  const signOutHandler = () => {
-    signOut();
-    router.replace("/auth");
+  const signOutHandler = async () => {
+    await signOut();
+    window.location.href = "/";
   };
   const toggleSidebar = () => {
     setIsSidebarShowed((prevBool) => !prevBool);
