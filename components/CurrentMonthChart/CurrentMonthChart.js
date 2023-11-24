@@ -6,26 +6,21 @@ const CurrentMonthChart = ({ expenses, date }) => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
-    const checkContentVisibility = (element) => {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
+    const options = {
+      threshold: 0.2,
     };
-    window.addEventListener("scroll", () => {
-      const isInViewport = checkContentVisibility(containerRef.current);
-      if (isInViewport) {
-        setIsVisible(true);
-      }
-    });
-    return () => {
-      window.removeEventListener("scroll", null);
+
+    const handleIntersection = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      });
     };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    observer.observe(containerRef.current);
   }, []);
 
   const toDate = new Date(date);
