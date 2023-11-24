@@ -7,21 +7,15 @@ const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
 
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
-    const checkContentVisibility = (element) => {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
-    };
     window.addEventListener("scroll", () => {
-      const isInViewport = checkContentVisibility(containerRef.current);
-      if (isInViewport) {
+      let scrollVal = window.scrollY + window.innerHeight;
+      const percentage = parseInt(
+        (scrollVal / document.documentElement.scrollHeight) * 100
+      );
+
+      if (percentage >= 92) {
         setIsVisible(true);
       }
     });
