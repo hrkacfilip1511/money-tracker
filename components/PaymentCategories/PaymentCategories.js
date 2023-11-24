@@ -1,11 +1,36 @@
 import Image from "next/image";
 import classes from "./PaymentCategories.module.css";
 import useStore from "../../store/useStore";
+import { useEffect, useRef, useState } from "react";
 
 const Payments = ({ expenses, setIsModalOpen }) => {
   const expensesByCash = expenses?.filter(
     (expense) => expense.paymentMethod === "cash"
   );
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const checkContentVisibility = (element) => {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+    window.addEventListener("scroll", () => {
+      const isInViewport = checkContentVisibility(containerRef.current);
+      if (isInViewport) {
+        setIsVisible(true);
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", null);
+    };
+  }, []);
 
   const isMobile = useStore((state) => state.isMobile);
   const expensesByCreditCard = expenses?.filter(
@@ -30,7 +55,12 @@ const Payments = ({ expenses, setIsModalOpen }) => {
   };
 
   return (
-    <div className={classes.paymentCategoriesContainer}>
+    <div
+      className={`${classes.paymentCategoriesContainer} ${
+        isVisible ? classes.show : ""
+      }`}
+      ref={containerRef}
+    >
       <div className={classes.paymentDetails}>
         <h3>Payment methods</h3>
         <div className={classes.paymentMethods}>

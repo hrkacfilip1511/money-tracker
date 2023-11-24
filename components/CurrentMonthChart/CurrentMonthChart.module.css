@@ -9,5 +9,10 @@
         width: 100%;
         background-color: antiquewhite;
         padding: 10px;
+        opacity: 0.1;
+    }
+    .show {
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
     }
 }

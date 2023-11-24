@@ -1,9 +1,35 @@
 import CategoryExpensesItem from "../CategoryExpensesItem/CategoryExpensesItem";
 import classes from "./CategoriesExpenses.module.css";
 import useStore from "../../store/useStore";
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
   const categories = useStore((state) => state.categories);
+
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const checkContentVisibility = (element) => {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+    window.addEventListener("scroll", () => {
+      const isInViewport = checkContentVisibility(containerRef.current);
+      if (isInViewport) {
+        setIsVisible(true);
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", null);
+    };
+  }, []);
+
   let expensesByCategories = [];
 
   const clickedCategory = (catName) => {
@@ -41,7 +67,12 @@ const CategoriesExpenses = ({ expenses, expenseAmount, setIsModalOpen }) => {
     }
   });
   return (
-    <div className={classes.categoriesExpenses}>
+    <div
+      className={`${classes.categoriesExpenses} ${
+        isVisible ? classes.show : ""
+      }`}
+      ref={containerRef}
+    >
       <h2 className={classes.title}>Expenses by categories</h2>
       {expensesByCategories.length > 0 &&
         expensesByCategories
