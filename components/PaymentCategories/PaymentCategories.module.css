@@ -123,6 +123,8 @@
     margin-top: 25px;
     margin-left: 0;
     padding: 7px 0;
+    /* transform: translateX(0%); */
+    opacity: 0;
   }
   .sliceCash,
 .sliceCard{
@@ -131,5 +133,10 @@
 }
 .legend {
   width: 45%;
+}
+.show {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+
 }
 }
