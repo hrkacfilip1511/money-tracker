@@ -12,6 +12,8 @@ import {
   MdHelpOutline,
   MdAddCircle,
 } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+
 import { useRouter } from "next/router";
 import useStore from "../../store/useStore";
 const MainNavigation = (props) => {
@@ -115,8 +117,8 @@ const MainNavigation = (props) => {
             <span>Add expense</span>
           </Link>
           <Link href={"/change-password"} className={classes.navLink}>
-            <MdOutlinePassword />
-            <span>Change password</span>
+            <FaUser />
+            <span>Profile</span>
           </Link>
           <Link href={"/help"} className={classes.navLink}>
             <MdHelpOutline />
