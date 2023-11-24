@@ -36,8 +36,8 @@ const ChangeBudgetForm = ({ session }) => {
       setErrorMsg("");
 
       setResponseMsg(dataJson.message);
-      let timeout = setTimeout(() => {
-        signOut();
+      let timeout = setTimeout(async () => {
+        await signOut();
       }, 1500);
       return () => clearTimeout(timeout);
     } else {
