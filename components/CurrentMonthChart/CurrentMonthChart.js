@@ -5,23 +5,23 @@ import classes from "./CurrentMonthChart.module.css";
 const CurrentMonthChart = ({ expenses, date }) => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => {
-    const options = {
-      threshold: 0.2,
-    };
+  // useEffect(() => {
+  //   const options = {
+  //     threshold: 0.2,
+  //   };
 
-    const handleIntersection = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      });
-    };
+  //   const handleIntersection = (entries, observer) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         setIsVisible(true);
+  //       }
+  //     });
+  //   };
 
-    const observer = new IntersectionObserver(handleIntersection, options);
+  //   const observer = new IntersectionObserver(handleIntersection, options);
 
-    observer.observe(containerRef.current);
-  }, []);
+  //   observer.observe(containerRef.current);
+  // }, []);
 
   const toDate = new Date(date);
   const filteredExpensesByCurrMonth = expenses.filter(
